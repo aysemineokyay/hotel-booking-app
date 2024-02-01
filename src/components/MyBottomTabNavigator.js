@@ -29,7 +29,7 @@ const MyBottomTabNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          title: "Home Screen",
+          title: "Home",
           tabBarIcon: () => {
             return (
               <View>
@@ -43,7 +43,7 @@ const MyBottomTabNavigator = () => {
         name="Booking"
         component={BookingScreen}
         options={{
-          title: "Booking Screen",
+          title: "Booking",
           tabBarIcon: () => {
             return (
               <View>
@@ -57,7 +57,7 @@ const MyBottomTabNavigator = () => {
         name="Favorite"
         component={FavoriteScreen}
         options={{
-          title: "Favorite Screen",
+          title: "Favorite",
           tabBarIcon: () => {
             return (
               <View>
@@ -72,7 +72,7 @@ const MyBottomTabNavigator = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          title: "Profile Screen",
+          title: "Profile",
           tabBarIcon: () => {
             return (
               <View>
