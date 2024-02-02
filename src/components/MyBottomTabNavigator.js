@@ -77,6 +77,7 @@ const MyBottomTabNavigator = () => {
         component={ProfileScreen}
         options={{
           title: "Profile",
+           headerTitleAlign: 'center',
           tabBarIcon: () => {
             return (
               <View>
