@@ -4,6 +4,7 @@ import HomeScreen from "../screens/homeScreens/HomeScreen";
 import BookingScreen from "../screens/homeScreens/BookingScreen";
 import FavoriteScreen from "../screens/homeScreens/FavoriteScreen";
 import ProfileScreen from "../screens/homeScreens/ProfileScreen";
+import EditProfileScreen from "./EditProfileScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome6  } from '@expo/vector-icons';
@@ -71,7 +72,6 @@ const MyBottomTabNavigator = () => {
           },
         }}
       />
-
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
@@ -86,8 +86,8 @@ const MyBottomTabNavigator = () => {
             );
           },
         }}
-      />
-    </Tab.Navigator>
+      />       
+      </Tab.Navigator>
   );
 };
 
