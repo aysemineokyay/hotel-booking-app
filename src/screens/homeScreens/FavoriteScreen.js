@@ -12,3 +12,4 @@ const FavoriteScreen = () => {
 export default FavoriteScreen;
 
 const styles = StyleSheet.create({});
+
