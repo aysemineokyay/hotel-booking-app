@@ -1,0 +1,374 @@
+[
+    {
+      "id": "0",
+      "place": "Bangalore",
+      "placeImage": "https://images.pexels.com/photos/7630190/pexels-photo-7630190.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "shortDescription": "City in Karnataka, India",
+      "properties": [
+        {
+          "id": "10",
+          "hotelName": "FabHotel Zeke",
+          "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+          "rating": 3.6,
+          "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+          "oldPrice": 4600,
+          "newPrice": 4000,
+          "latitude": "13.0359",
+          "longitude": "77.6431",
+          "photos": [
+            {
+              "id": "100",
+              "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+            },
+            {
+              "id": "101",
+              "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+            },
+            {
+              "id": "102",
+              "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+            },
+            {
+              "id": "103",
+              "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+        "id": "1",
+        "place": "Yunanistan",
+        "placeImage": "https://images.pexels.com/photos/9373357/pexels-photo-9373357.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 4500,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "place": "Türkiye",
+        "placeImage":  "https://images.pexels.com/photos/9373357/pexels-photo-9373357.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 3800,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "place": "İspanya",
+        "placeImage": "https://images.pexels.com/photos/7630190/pexels-photo-7630190.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 3300,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "place": "Fransa",
+        "placeImage": "https://images.pexels.com/photos/9373357/pexels-photo-9373357.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 3312,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "place": "Almanya",
+        "placeImage": "https://images.pexels.com/photos/7630190/pexels-photo-7630190.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 3312,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "6",
+        "place": "Almanya",
+        "placeImage": "https://images.pexels.com/photos/9373357/pexels-photo-9373357.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 3312,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "7",
+        "place": "İspanya",
+        "placeImage": "https://images.pexels.com/photos/7630190/pexels-photo-7630190.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 3312,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "8",
+        "place": "İspanya",
+        "placeImage": "https://images.pexels.com/photos/7630190/pexels-photo-7630190.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 3312,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "9",
+        "place": "İspanya",
+        "placeImage": "https://images.pexels.com/photos/9373357/pexels-photo-9373357.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "shortDescription": "City in Karnataka, India",
+        "properties": [
+          {
+            "id": "10",
+            "hotelName": "FabHotel Zeke",
+            "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
+            "rating": 3.6,
+            "address": "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India",
+            "oldPrice": 4600,
+            "newPrice": 3312,
+            "latitude": "13.0359",
+            "longitude": "77.6431",
+            "photos": [
+              {
+                "id": "100",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1"
+              },
+              {
+                "id": "101",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845633.jpg?k=19a43441c40e9c9ff3b57d6a1a7c379c4def04730e34f76fd4a298eaefcd23d1&o=&hp=1"
+              },
+              {
+                "id": "102",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845621.jpg?k=52411b8fb2fe37edf07da6d3dfb145cc85288ac210f28ff19608ba101f1bba0e&o=&hp=1"
+              },
+              {
+                "id": "103",
+                "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845650.jpg?k=36bbad9d47f2db957eddbf922e711fbfc9ab2bf901ceaa1bd5d1ca4dc857f21c&o=&hp=1"
+              }
+            ]
+          }
+        ]
+      }
+  
+  ]
+  

@@ -34,6 +34,7 @@ const MyBottomTabNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
+          headerShown:false,
           title: "Home",
           tabBarIcon: () => {
             return (
