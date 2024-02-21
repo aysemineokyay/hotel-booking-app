@@ -1,31 +1,25 @@
 import React, { useState } from "react";
 import {
   View,
-  KeyboardAvoidingView,
   TextInput,
-  Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
   Button,
   StyleSheet,
   Text,
-  SafeAreaView,
+  Keyboard,
+  KeyboardAvoidingView,
   TouchableOpacity,
+  Platform,
+  TouchableWithoutFeedback,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useHeaderHeight } from "@react-navigation/elements";
 
-const ChangePasswordScreen = () => {
+const CreateAccountScreen = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const height = useHeaderHeight();
-
-  const handleChangePassword = () => {
-    console.log("Şifre değiştiriliyor...");
-  };
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -35,14 +29,25 @@ const ChangePasswordScreen = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>New Password</Text>
+            <Text style={styles.inputLabel}>Email Address</Text>
             <View style={styles.inputWithIcon}>
               <Icon name="lock" size={24} color="#000" style={styles.icon} />
               <TextInput
                 style={styles.input}
                 onChangeText={setNewPassword}
                 value={newPassword}
-                placeholder="Enter new password"
+                placeholder="Enter your email address"
+                secureTextEntry={hidePassword}
+              />
+            </View>
+            <Text style={styles.inputLabel}>Password</Text>
+            <View style={styles.inputWithIcon}>
+              <Icon name="lock" size={24} color="#000" style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                onChangeText={setNewPassword}
+                value={newPassword}
+                placeholder="Create password"
                 secureTextEntry={hidePassword}
               />
               <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
@@ -61,7 +66,7 @@ const ChangePasswordScreen = () => {
                 style={styles.input}
                 onChangeText={setConfirmPassword}
                 value={confirmPassword}
-                placeholder="Confirm your new password"
+                placeholder="Confirm your password"
                 secureTextEntry={hideConfirmPassword}
               />
               <TouchableOpacity
@@ -76,11 +81,7 @@ const ChangePasswordScreen = () => {
             </View>
 
             <View style={styles.buttonContainer}>
-              <Button
-                title="Change Now"
-                color="white"
-                onPress={handleChangePassword}
-              />
+              <Button title="Create Account" color="white" />
             </View>
           </View>
         </View>
@@ -131,4 +132,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChangePasswordScreen;
+export default CreateAccountScreen;
