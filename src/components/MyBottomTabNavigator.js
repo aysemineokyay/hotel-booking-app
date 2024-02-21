@@ -4,8 +4,10 @@ import HomeScreen from "../screens/homeScreens/HomeScreen";
 import BookingScreen from "../screens/homeScreens/BookingScreen";
 import FavoriteScreen from "../screens/homeScreens/FavoriteScreen";
 import ProfileScreen from "../screens/homeScreens/ProfileScreen";
+import EditProfileScreen from "./EditProfileScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome6  } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const MyBottomTabNavigator = () => {
@@ -20,9 +22,12 @@ const MyBottomTabNavigator = () => {
           backgroundColor: "white",
           borderTopWidth: 0,
         },
-        tabBarActiveTintColor: "#646367",
+        tabBarActiveTintColor: "#000000",
         headerStyle: { height: 110 },
         headerShadowVisible: false,
+        tabBarLabelStyle: {
+          fontWeight: 'bold', 
+        },
       })}
     >
       <Tab.Screen
@@ -34,7 +39,7 @@ const MyBottomTabNavigator = () => {
           tabBarIcon: () => {
             return (
               <View>
-                <AntDesign name="home" size={24} color="black" />
+                <AntDesign name="home" size={30} color="black" />
               </View>
             );
           },
@@ -48,7 +53,7 @@ const MyBottomTabNavigator = () => {
           tabBarIcon: () => {
             return (
               <View>
-                <AntDesign name="book" size={24} color="black" />
+                <AntDesign name="book" size={30} color="black" />
               </View>
             );
           },
@@ -62,28 +67,28 @@ const MyBottomTabNavigator = () => {
           tabBarIcon: () => {
             return (
               <View>
-                <MaterialIcons name="favorite-border" size={24} color="black" />
+                <MaterialIcons name="favorite-border" size={30} color="black" />
               </View>
             );
           },
         }}
       />
-
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
           title: "Profile",
+           headerTitleAlign: 'center',
           tabBarIcon: () => {
             return (
               <View>
-                <AntDesign name="setting" size={24} color="black" />
+                <FontAwesome6 name="user" size={30} color="black" />
               </View>
             );
           },
         }}
-      />
-    </Tab.Navigator>
+      />       
+      </Tab.Navigator>
   );
 };
 
