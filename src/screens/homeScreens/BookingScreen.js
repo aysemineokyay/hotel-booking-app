@@ -14,7 +14,7 @@ const BookingScreen = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getRezervations());
+    // dispatch(getRezervations());
   }, []);
   console.log("rezervations", rezervations);
   return (
