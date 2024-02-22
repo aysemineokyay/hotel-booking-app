@@ -64,7 +64,9 @@ const HotelDetails = (props) => {
     </View>
   );
 
+    
   const onPress = () => {
+    // @ts-ignore
     navigation.navigate("Map");
   };
 
@@ -86,7 +88,7 @@ const HotelDetails = (props) => {
         <Text style={styles.backButtonText}>Geri</Text>
       </TouchableOpacity>
 
-      <View style={styles.info}>
+      <View>
         <View style={styles.infoContainer}>
           <View style={styles.hotelNameContainer}>
             <Text style={styles.hotelName}>Panshi Hotel </Text>

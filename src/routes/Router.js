@@ -24,7 +24,7 @@ const Router = () => {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator >
         {currentUser ? (
           <Stack.Screen
             name="HomeRoutes"
