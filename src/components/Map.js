@@ -44,8 +44,7 @@ const Map = () => {
             />
           </Marker>
         )}
-      </MapView>
-     
+      </MapView>     
     </SafeAreaView>
   );
 };
