@@ -8,6 +8,7 @@ const HotelCard = (props) => {
 
   const navigation =useNavigation();
   const handlePress = () => {
+    // @ts-ignore
     navigation.navigate('Detail');
   };
 

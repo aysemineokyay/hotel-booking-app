@@ -5,6 +5,8 @@ import MyBottomTabNavigator from "../components/MyBottomTabNavigator";
 import HotelDetails from "../components/HotelDetails";
 import EditProfileScreen from "../components/EditProfileScreen";
 import ChangePasswordScreen from "../components/ChangePasswordScreen";
+import Map from "../components/Map";
+import LoginAccountScreen from "../components/LoginAccountScreen";
 
 const HomeRoutes = () => {
   const Stack = createNativeStackNavigator();
@@ -14,8 +16,9 @@ const HomeRoutes = () => {
         headerShadowVisible: false,
         headerTintColor: "black",
         headerTitle: "",
+        
       }}
-    >
+          >
       <Stack.Screen
         name="MyBottomTabNavigator"
         component={MyBottomTabNavigator}
@@ -23,6 +26,8 @@ const HomeRoutes = () => {
       />
        <Stack.Screen name="Detail" component={HotelDetails} options={{ headerShown: false }}/>
        <Stack.Screen name="Map" component={Map} options={{ headerShown: false }}/>
+       <Stack.Screen  name="LoginAccount" component={LoginAccountScreen} options={{ headerShown: false }}/>
+
 
       <Stack.Screen
         name="EditProfileScreen"
