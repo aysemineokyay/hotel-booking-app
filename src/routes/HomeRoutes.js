@@ -3,6 +3,8 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MyBottomTabNavigator from "../components/MyBottomTabNavigator";
 import HotelDetails from "../components/HotelDetails";
+import EditProfileScreen from "../components/EditProfileScreen";
+import ChangePasswordScreen from "../components/ChangePasswordScreen";
 
 const HomeRoutes = () => {
   const Stack = createNativeStackNavigator();
@@ -22,6 +24,16 @@ const HomeRoutes = () => {
        <Stack.Screen name="Detail" component={HotelDetails} options={{ headerShown: false }}/>
        <Stack.Screen name="Map" component={Map} options={{ headerShown: false }}/>
 
+      <Stack.Screen
+        name="EditProfileScreen"
+        component={EditProfileScreen}
+        options={{ headerShown: true, headerTitle: "Edit Profile" }}
+      />
+      <Stack.Screen
+        name="ChangePasswordScreen"
+        component={ChangePasswordScreen}
+        options={{ headerShown: true, headerTitle: "Change Password" }}
+      />
     </Stack.Navigator>
   );
 };
