@@ -4,12 +4,19 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  Modal,
 } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import {
+  BottomModal,
+  ModalFooter,
+  ModalButton,
+  ModalTitle,
+  SlideAnimation,
+  ModalContent,
+} from "react-native-modals";
 
 const LoginAccountScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,16 +35,16 @@ const LoginAccountScreen = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <View style={styles.headercontainer}>
+        <View style={styles.headerContainer}>
           <Text style={styles.headerText}>Login Account</Text>
           <Text style={styles.text}>Please login with registered account</Text>
         </View>
 
         <View style={styles.emailContainer}>
           <Text style={styles.emailText}>Email Address</Text>
-          <TouchableOpacity style={styles.emailButton}>
+          <TouchableOpacity style={styles.emailTextInput}>
             <Feather name="mail" size={24} color="grey" />
             <TextInput
               placeholder="Enter your email address"
@@ -75,7 +82,7 @@ const LoginAccountScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.forgotPasswordContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={toggleModalVisibility}>
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
@@ -86,27 +93,48 @@ const LoginAccountScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <Modal
-         animationType="slide"
-         transparent={true}
-         visible={isModalVisible}
-         onRequestClose={() => {
-           setIsModalVisible(!isModalVisible);
-         }}
-         
-         
-        >
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalText}>Forgot Password</Text>
-            <Text style={styles.modalText}>Enter your email address</Text>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={toggleModalVisibility}
-            >
-              <Text style={styles.closeModalText}>Send Code</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+        <View style={styles.modalContainer}>
+          <BottomModal
+            swipeThreshold={200}
+            swipeDirection={["up", "down"]}
+            visible={isModalVisible}
+            modalAnimation={
+              new SlideAnimation({
+                slideFrom: "bottom",
+              })
+            }
+          >
+            <ModalContent>
+              <View style={styles.modalContentContainer}>
+                <Text style={styles.modalTextHeader}>Forgot Password</Text>
+                <Text style={styles.modalText}>Enter your email address</Text>
+
+                <View style={styles.passwordResetContainer}>
+                  <Text style={styles.passwordResetText}>Email Address</Text>
+                  <TouchableOpacity style={styles.passwordResetTextInput}>
+                    <Feather name="mail" size={24} color="#06b3c4" />
+                    <TextInput
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChangeText={(text) => {
+                        setEmail(text);
+                      }}
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => {
+                    toggleModalVisibility();
+                  }}
+                >
+                  <Text style={styles.closeModalText}>Send Code</Text>
+                </TouchableOpacity>
+              </View>
+            </ModalContent>
+          </BottomModal>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -116,10 +144,11 @@ export default LoginAccountScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 16,
     backgroundColor: "#FFFFFF",
   },
-  headercontainer: {
+  headerContainer: {
     paddingTop: 40,
     paddingBottom: 10,
     paddingHorizontal: 15,
@@ -142,7 +171,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
-  emailButton: {
+  emailTextInput: {
     marginTop: 10,
     padding: 10,
     flexDirection: "row",
@@ -207,7 +236,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 50,
-    marginBottom: "auto",
+    marginBottom: 200,
     marginHorizontal: 20,
     height: 60,
   },
@@ -215,19 +244,60 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
   },
+
   modalContainer: {
-    backgroundColor: "white",
-    padding: 22,
-    justifyContent: "center",
+    flex: 1,
+    
+    backgroundColor: "white", 
     alignItems: "center",
-    borderRadius: 4,
     borderColor: "rgba(0, 0, 0, 0.1)",
-    width:"auto",
-    height:600,
+    width: "auto",
+    height: "50%",
+    justifyContent: "flex-end",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  
   },
+  modalContentContainer: {
+    paddingTop:20,
+    paddingLeft:10,
+    alignItems: "flex-start",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+  modalTextHeader: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+    color: "#9F94A2",
+    paddingTop: 5,
+  },
+
+
+  passwordResetContainer:{ 
+    paddingTop: 10,
+  },
+  passwordResetText:{
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  passwordResetTextInput:{
+    marginTop: 10,
+    marginBottom:40,
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 15,
+    borderWidth: 1,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
+    borderColor: "#f9f9f9",
+    height: 60,
+    width:350,
   },
 
   modalButton: {
@@ -238,14 +308,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#06b3c4",
     borderWidth: 1,
     borderColor: "#06b3c4",
-    borderRadius:30,
-    width:350,
-    height:50,
+    borderRadius: 30,
+    width: 350,
+    height: 50,
+    marginBottom:40,
+  
   },
   closeModalText: {
     color: "white",
     textAlign: "center",
     fontWeight: "600",
-    fontSize:16,
+    fontSize: 16,
   },
 });
