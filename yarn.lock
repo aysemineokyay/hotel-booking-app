@@ -1209,7 +1209,7 @@
 
 "@expo/cli@0.17.5":
   version "0.17.5"
-  resolved "https://registry.npmjs.org/@expo/cli/-/cli-0.17.5.tgz"
+  resolved "https://registry.yarnpkg.com/@expo/cli/-/cli-0.17.5.tgz#b409d0ea330b3c1283b9d239bb747de9284d119e"
   integrity sha512-9cMquL/5bBfV73CbZcWipk3KZSo8mBqdgvkoWCtEtnnlm/879ayxzMWjVIgT5yV4w+X7+N6KkBSUIIj4t9Xqew==
   dependencies:
     "@babel/runtime" "^7.20.0"
@@ -2414,6 +2414,23 @@
     open "^7.0.3"
     serve-static "^1.13.1"
     temp-dir "^2.0.0"
+
+"@react-native/dev-middleware@^0.73.6":
+  version "0.73.8"
+  resolved "https://registry.yarnpkg.com/@react-native/dev-middleware/-/dev-middleware-0.73.8.tgz#2e43722a00c7b8db753f747f40267cbad6caba4d"
+  integrity sha512-oph4NamCIxkMfUL/fYtSsE+JbGOnrlawfQ0kKtDQ5xbOjPKotKoXqrs1eGwozNKv7FfQ393stk1by9a6DyASSg==
+  dependencies:
+    "@isaacs/ttlcache" "^1.4.1"
+    "@react-native/debugger-frontend" "0.73.3"
+    chrome-launcher "^0.15.2"
+    chromium-edge-launcher "^1.0.0"
+    connect "^3.6.5"
+    debug "^2.2.0"
+    node-fetch "^2.2.0"
+    open "^7.0.3"
+    serve-static "^1.13.1"
+    temp-dir "^2.0.0"
+    ws "^6.2.2"
 
 "@react-native/gradle-plugin@0.73.4":
   version "0.73.4"
@@ -3870,11 +3887,6 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz"
   integrity sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==
 
-escape-string-regexp@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz"
-  integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
-
 escape-string-regexp@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz"
@@ -4015,7 +4027,7 @@ expo-modules-autolinking@>=0.8.1, expo-modules-autolinking@1.10.3:
 
 expo-modules-core@1.11.9:
   version "1.11.9"
-  resolved "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-1.11.9.tgz"
+  resolved "https://registry.yarnpkg.com/expo-modules-core/-/expo-modules-core-1.11.9.tgz#4b95070390fe7e3418aa84580244bcf0540357ca"
   integrity sha512-GTUb81vcPaF+5MtlBI1u9IjrZbGdF1ZUwz3u8Gc+rOLBblkZ7pYsj2mU/tu+k0khTckI9vcH4ZBksXWvE1ncjQ==
   dependencies:
     invariant "^2.2.4"
@@ -4550,7 +4562,7 @@ hyphenate-style-name@^1.0.3:
 
 iconv-lite@^0.6.2:
   version "0.6.3"
-  resolved "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.6.3.tgz#a52f80bf38da1952eb5c681790719871a1a72501"
   integrity sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==
   dependencies:
     safer-buffer ">= 2.1.2 < 3.0.0"
@@ -6607,7 +6619,7 @@ safe-json-stringify@~1:
 
 "safer-buffer@>= 2.1.2 < 3.0.0":
   version "2.1.2"
-  resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
+  resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 sax@>=0.6.0:
