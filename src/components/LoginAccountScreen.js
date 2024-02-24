@@ -11,9 +11,6 @@ import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import {
   BottomModal,
-  ModalFooter,
-  ModalButton,
-  ModalTitle,
   SlideAnimation,
   ModalContent,
 } from "react-native-modals";
