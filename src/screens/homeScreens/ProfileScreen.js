@@ -10,8 +10,12 @@ import { Ionicons } from "@expo/vector-icons"; // expo kullanıyorsanız
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { auth } from "../../services/firebase";
 
 const ProfileScreen = ({ navigation }) => {
+  const handleLogout = () => {
+    auth.signOut();
+  };
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity
@@ -81,7 +85,7 @@ const ProfileScreen = ({ navigation }) => {
         <Ionicons name="chevron-forward-outline" size={30} color="black" />
       </TouchableOpacity>
       */}
-      <TouchableOpacity style={styles.item}>
+      <TouchableOpacity style={styles.item} onPress={handleLogout}>
         <Ionicons name="log-out-outline" size={30} color="#ff0000" />
         <Text style={{ color: "red" }}> Logout</Text>
       </TouchableOpacity>
