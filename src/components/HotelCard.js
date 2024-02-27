@@ -5,11 +5,11 @@ import { EvilIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 const HotelCard = (props) => {
-
-  const navigation =useNavigation();
+  console.log(props);
+  const navigation = useNavigation();
   const handlePress = () => {
     // @ts-ignore
-    navigation.navigate('Detail');
+    navigation.navigate("Detail");
   };
 
   return (
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   textContainer: {
     alignItems: "flex-start",
     marginTop: 10,
-    marginLeft:10,
+    marginLeft: 10,
   },
 
   placeContainer: {

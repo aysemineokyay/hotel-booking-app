@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { db } from "../services/firebase";
@@ -13,8 +13,18 @@ export const getHotels = createAsyncThunk("homeScreen/getHotels", async () => {
   const hotelsRef = collection(db, "hotels");
   const snapshot = await getDocs(hotelsRef);
   const hotels = snapshot.docs.map((docs) => {
+    const id = docs.id;
     const hotelsData = docs.data();
-    return { data: hotelsData };
+    return {
+      id: id,
+      country: hotelsData.country,
+      city: hotelsData.city,
+      location: hotelsData.location,
+      image: hotelsData.image,
+      description: hotelsData.description,
+      rating: hotelsData.rating,
+      name: hotelsData.name,
+    };
   });
   return hotels;
 });

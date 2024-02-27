@@ -60,11 +60,10 @@ const HotelDetails = (props) => {
 
   const renderCarouselItem = ({ item }) => (
     <View style={styles.carouselItem}>
-      <Image style={styles.image} source={item.placeImage} />
+      <Image style={styles.image} source={item.image} />
     </View>
   );
 
-    
   const onPress = () => {
     // @ts-ignore
     navigation.navigate("Map");
@@ -103,18 +102,18 @@ const HotelDetails = (props) => {
           <Text style={styles.placeNameText}>Bangladesh</Text>
         </View>
       </View>
-  
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Text style={styles.buttonText}>Haritada Gör</Text>
-        </TouchableOpacity>
 
-        <HotelDetailsButton
-          onTabPress={handleTabPress}
-          selectedTab={selectedTab}
-        />
-        {renderContent()}
-  
-<FooterInfo/>
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+        <Text style={styles.buttonText}>Haritada Gör</Text>
+      </TouchableOpacity>
+
+      <HotelDetailsButton
+        onTabPress={handleTabPress}
+        selectedTab={selectedTab}
+      />
+      {renderContent()}
+
+      <FooterInfo />
     </SafeAreaView>
   );
 };
@@ -196,7 +195,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "white",
   },
-
 });
 
 export default HotelDetails;
