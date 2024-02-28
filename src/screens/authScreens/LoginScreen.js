@@ -7,9 +7,9 @@ import {
   Button,
 } from "react-native";
 import React, { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import {
   createUserWithEmailAndPassword,
@@ -73,7 +73,7 @@ const LoginScreen = () => {
 
       <View style={styles.emailContainer}>
         <Text style={styles.emailText}>Email Address</Text>
-        <TouchableOpacity style={styles.emailTextInput}>
+        <View style={styles.emailTextInput}>
           <Feather name="mail" size={24} color="grey" />
           <TextInput
             placeholder="Enter your email address"
@@ -83,13 +83,13 @@ const LoginScreen = () => {
             inputMode="email"
             autoCapitalize="none"
           />
-        </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.passwordContainer}>
         <Text style={styles.passwordText}>Password</Text>
-        <TouchableOpacity style={styles.passwordButton}>
-          <View style={styles.passwordButtonLeftSide}>
+        <View style={styles.passwordInput}>
+          <View style={styles.passwordInputLeftSide}>
             <Feather name="lock" size={24} color="grey" />
             <TextInput
               placeholder="Create your password"
@@ -100,7 +100,7 @@ const LoginScreen = () => {
               }}
             />
           </View>
-          <View style={styles.passwordButtonRightSide}>
+          <View style={styles.passwordInputRightSide}>
             <TouchableOpacity onPress={togglePasswordVisibility}>
               {showPassword ? (
                 <FontAwesome5 name="eye-slash" size={24} color="grey" />
@@ -109,7 +109,7 @@ const LoginScreen = () => {
               )}
             </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.forgotPasswordContainer}>
         <TouchableOpacity onPress={toggleModalVisibility}>
@@ -136,28 +136,36 @@ const LoginScreen = () => {
         >
           <ModalContent>
             <View style={styles.modalContentContainer}>
-              <Text style={styles.modalTextHeader}>Forgot Password</Text>
-              <Text style={styles.modalText}>Enter your email address</Text>
+              <View style={styles.topContainer}>
+                <View style={styles.topContainerLeftSide}>
+                  <Text style={styles.modalTextHeader}>Forgot Password</Text>
+                  <Text style={styles.modalText}>Enter your email address</Text>
+                </View>
+                <View style={styles.topContainerRightSide}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      toggleModalVisibility();
+                    }}
+                  >
+                    <AntDesign name="close" size={24} color="grey" />
+                  </TouchableOpacity>
+                </View>
+              </View>
 
               <View style={styles.passwordResetContainer}>
                 <Text style={styles.passwordResetText}>Email Address</Text>
-                <TouchableOpacity style={styles.passwordResetTextInput}>
-                  <Feather name="mail" size={24} color="#06b3c4" />
+                <View style={styles.passwordResetTextInput}>
+                  <Feather name="mail" size={24} color="#448178" />
                   <TextInput
                     placeholder="Enter your email address"
                     onChangeText={(text) => {
                       dispatch(setEmail(text));
                     }}
                   />
-                </TouchableOpacity>
+                </View>
               </View>
 
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={() => {
-                  toggleModalVisibility();
-                }}
-              >
+              <TouchableOpacity style={styles.modalButton}>
                 <Text style={styles.closeModalText}>Send Code</Text>
               </TouchableOpacity>
             </View>
@@ -173,11 +181,10 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 16,
     backgroundColor: "#FFFFFF",
   },
   headerContainer: {
-    paddingTop: 40,
     paddingBottom: 10,
     paddingHorizontal: 15,
     justifyContent: "center",
@@ -193,7 +200,7 @@ const styles = StyleSheet.create({
   },
   emailContainer: {
     paddingHorizontal: 15,
-    paddingTop: 10,
+    paddingTop: 20,
   },
   emailText: {
     fontSize: 16,
@@ -219,7 +226,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
-  passwordButton: {
+  passwordInput: {
     marginTop: 10,
     padding: 10,
     flexDirection: "row",
@@ -231,13 +238,13 @@ const styles = StyleSheet.create({
     borderColor: "#fbfbfd",
     height: 60,
   },
-  passwordButtonLeftSide: {
+  passwordInputLeftSide: {
     flexDirection: "row",
     alignItems: "center",
     gap: 15,
   },
 
-  passwordButtonRightSide: {
+  passwordInputRightSide: {
     flexDirection: "row",
     alignItems: "center",
     gap: 15,
@@ -252,20 +259,20 @@ const styles = StyleSheet.create({
   },
 
   forgotPasswordText: {
-    color: "#06b3c4",
+    color: "#448178",
     fontWeight: "600",
   },
 
   signInContainer: {
-    backgroundColor: "#06b3c4",
+    backgroundColor: "#448178",
     borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: 10,
     borderColor: "#06b3c4",
     alignItems: "center",
     justifyContent: "center",
     marginTop: 50,
     marginBottom: 200,
-    marginHorizontal: 20,
+    marginHorizontal: 5,
     height: 60,
   },
   signInContainerText: {
@@ -292,6 +299,18 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
   },
+
+  topContainer: {
+    flexDirection: "row",
+
+    justifyContent: "space-between",
+    gap: 180,
+  },
+  topContainerLeftSide: {
+    paddingTop: 20,
+  },
+  topContainerRightSide: {paddingHorizontal:5,},
+
   modalTextHeader: {
     fontSize: 18,
     fontWeight: "600",
@@ -331,10 +350,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 50,
     paddingVertical: 10,
-    backgroundColor: "#06b3c4",
+    backgroundColor: "#448178",
     borderWidth: 1,
-    borderColor: "#06b3c4",
-    borderRadius: 30,
+    borderColor: "#448178",
+    borderRadius: 10,
     width: 350,
     height: 50,
     marginBottom: 40,
