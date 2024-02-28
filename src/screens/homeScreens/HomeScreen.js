@@ -45,20 +45,18 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <HomeScreen_Header />
-        <HomeScreen_SearchBar onSearch={handleSearch} />
-        <View style={styles.flatlistContainer}>
-          <FlatList
-            data={hotels}
-            renderItem={renderHotel}
-            keyExtractor={(item) => item.id}
-            numColumns={2}
-          />
-        </View>
+    <View style={styles.container}>
+      <HomeScreen_Header />
+      <HomeScreen_SearchBar onSearch={handleSearch} />
+      <View style={styles.flatlistContainer}>
+        <FlatList
+          data={hotels}
+          renderItem={renderHotel}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+        />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

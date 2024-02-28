@@ -13,13 +13,64 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useHeaderHeight } from "@react-navigation/elements";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectConfirmPassword,
+  selectEmail,
+  selectPassword,
+  setConfirmPassword,
+  setEmail,
+  setPassword,
+} from "../../slices/loginScreenSlice";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import { auth } from "../../services/firebase";
 
 const CreateAccountScreen = () => {
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [hidePassword, setHidePassword] = useState(true);
-  const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
+  const email = useSelector(selectEmail);
+  const password = useSelector(selectPassword);
+  const confirmPassword = useSelector(selectConfirmPassword);
+  const dispatch = useDispatch();
   const height = useHeaderHeight();
+  const handleSignup = () => {
+    if (password === confirmPassword) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+          sendEmailVerification(userCredential.user)
+            .then(() => {
+              alert(`Doğrulama maili gönderildi: ${userCredential.user.email}`);
+            })
+            .catch((error) => {
+              console.log(error);
+              alert(error);
+            });
+        })
+        .catch((error) => {
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              alert("Girmiş olduğunuz email adresi kullanılıyor.");
+              break;
+            case "auth/invalid-email":
+              alert("Geçersiz email adresi girdiniz.");
+              break;
+            case "auth/operation-not-allowed":
+              alert("Bir hata oluştu.");
+              break;
+            case "auth/weak-password":
+              alert("Lütfen daha güçlü bir şifre belirleyiniz.");
+              break;
+            default:
+              console.log(error.message);
+              break;
+          }
+        });
+    } else {
+      alert("Şifreler birbiriyle aynı değil!");
+    }
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -34,10 +85,10 @@ const CreateAccountScreen = () => {
               <Icon name="lock" size={24} color="#000" style={styles.icon} />
               <TextInput
                 style={styles.input}
-                onChangeText={setNewPassword}
-                value={newPassword}
+                onChangeText={(text) => dispatch(setEmail(text))}
+                inputMode="email"
+                autoCapitalize="none"
                 placeholder="Enter your email address"
-                secureTextEntry={hidePassword}
               />
             </View>
             <Text style={styles.inputLabel}>Password</Text>
@@ -45,18 +96,11 @@ const CreateAccountScreen = () => {
               <Icon name="lock" size={24} color="#000" style={styles.icon} />
               <TextInput
                 style={styles.input}
-                onChangeText={setNewPassword}
-                value={newPassword}
+                onChangeText={(text) => dispatch(setPassword(text))}
                 placeholder="Create password"
-                secureTextEntry={hidePassword}
+                secureTextEntry
+                autoCapitalize="none"
               />
-              <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
-                <Icon
-                  name={hidePassword ? "eye-slash" : "eye"}
-                  size={24}
-                  color="#000"
-                />
-              </TouchableOpacity>
             </View>
 
             <Text style={styles.inputLabel}>Confirm Password</Text>
@@ -64,24 +108,19 @@ const CreateAccountScreen = () => {
               <Icon name="lock" size={24} color="#000" style={styles.icon} />
               <TextInput
                 style={styles.input}
-                onChangeText={setConfirmPassword}
-                value={confirmPassword}
+                onChangeText={(text) => dispatch(setConfirmPassword(text))}
                 placeholder="Confirm your password"
-                secureTextEntry={hideConfirmPassword}
+                secureTextEntry
+                autoCapitalize="none"
               />
-              <TouchableOpacity
-                onPress={() => setHideConfirmPassword(!hideConfirmPassword)}
-              >
-                <Icon
-                  name={hideConfirmPassword ? "eye-slash" : "eye"}
-                  size={24}
-                  color="#000"
-                />
-              </TouchableOpacity>
             </View>
 
             <View style={styles.buttonContainer}>
-              <Button title="Create Account" color="white" />
+              <Button
+                title="Create Account"
+                color="white"
+                onPress={handleSignup}
+              />
             </View>
           </View>
         </View>
