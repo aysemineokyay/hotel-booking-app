@@ -43,6 +43,8 @@ export const getRezervations = createAsyncThunk(
         userId: rezervationsData.userId,
       };
     });
+    var hotelRefData = await getDoc(rezervations[0].hotelId);
+    console.log("data:", hotelRefData.data());
     return rezervations;
   }
 );
