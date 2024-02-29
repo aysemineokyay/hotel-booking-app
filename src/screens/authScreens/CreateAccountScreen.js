@@ -26,6 +26,7 @@ import {
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
 
@@ -35,21 +36,28 @@ const CreateAccountScreen = () => {
   const confirmPassword = useSelector(selectConfirmPassword);
   const dispatch = useDispatch();
   const height = useHeaderHeight();
+  const [username, setUsername] = useState(null);
   const handleSignup = () => {
     if (password === confirmPassword) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          console.log(userCredential);
-          sendEmailVerification(userCredential.user)
+          updateProfile(auth.currentUser, {
+            displayName: username, // Burada istediğiniz display name'i belirtin
+          })
             .then(() => {
+              sendEmailVerification(userCredential.user);
+            })
+            .then(() => {
+              // E-posta doğrulama gönderildi
               Alert.alert(
                 "Başarılı",
                 `Doğrulama maili gönderildi: ${userCredential.user.email}`
               );
             })
             .catch((error) => {
+              // Hata oluştu
               console.log(error);
-              alert(error);
+              Alert.alert("Error", error.message);
             });
         })
         .catch((error) => {
@@ -87,6 +95,15 @@ const CreateAccountScreen = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
           <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>User Name</Text>
+            <View style={styles.inputWithIcon}>
+              <Icon name="lock" size={24} color="#000" style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => setUsername(text)}
+                placeholder="Enter your user name"
+              />
+            </View>
             <Text style={styles.inputLabel}>Email Address</Text>
             <View style={styles.inputWithIcon}>
               <Icon name="lock" size={24} color="#000" style={styles.icon} />
@@ -169,7 +186,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   buttonContainer: {
-    marginTop: "50%",
+    marginTop: "40%",
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 10,
