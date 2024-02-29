@@ -11,19 +11,67 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useHeaderHeight } from "@react-navigation/elements";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectConfirmPassword,
+  selectEmail,
+  selectPassword,
+  setConfirmPassword,
+  setPassword,
+} from "../slices/loginScreenSlice";
+import {
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword,
+} from "firebase/auth";
+import { auth } from "../services/firebase";
 
-const ChangePasswordScreen = () => {
+const ChangePasswordScreen = (navigation) => {
+  const email = useSelector(selectEmail);
+  const password = useSelector(selectPassword);
+  const confirmPassword = useSelector(selectConfirmPassword);
+  const dispatch = useDispatch();
   const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const height = useHeaderHeight();
 
   const handleChangePassword = () => {
-    console.log("Şifre değiştiriliyor...");
+    if (newPassword === confirmPassword) {
+      const user = auth.currentUser;
+      const credential = EmailAuthProvider.credential(user.email, password);
+      console.log("credential", credential);
+      reauthenticateWithCredential(user, credential)
+        .then(() => {
+          // Yeni şifreyi kullanarak kullanıcının şifresini güncelle
+          updatePassword(user, confirmPassword)
+            .then(() => {
+              Alert.alert("Başarılı", "Şifre başarılı şekilde güncellendi.");
+              setNewPassword("");
+              dispatch(setConfirmPassword(null));
+            })
+            .catch((error) => {
+              Alert.alert(
+                "Hata",
+                "Şifre güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz."
+              );
+              console.error("Şifre güncelleme hatası:", error);
+            });
+        })
+        .catch((error) => {
+          Alert.alert(
+            "Hata",
+            "Lütfen kullanıcı bilgilerinizi kontrol ediniz ve tekrar giriş yapıp deneyiniz."
+          );
+          console.error("Yeniden doğrulama hatası:", error);
+        });
+    } else {
+      alert("Şifreler birbiriyle aynı değil!");
+    }
   };
 
   return (
@@ -40,10 +88,11 @@ const ChangePasswordScreen = () => {
               <Icon name="lock" size={24} color="#000" style={styles.icon} />
               <TextInput
                 style={styles.input}
-                onChangeText={setNewPassword}
-                value={newPassword}
+                onChangeText={(text) => setNewPassword(text)}
                 placeholder="Enter new password"
                 secureTextEntry={hidePassword}
+                autoCapitalize="none"
+                value={newPassword}
               />
               <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
                 <Icon
@@ -59,10 +108,13 @@ const ChangePasswordScreen = () => {
               <Icon name="lock" size={24} color="#000" style={styles.icon} />
               <TextInput
                 style={styles.input}
-                onChangeText={setConfirmPassword}
-                value={confirmPassword}
+                onChangeText={(text) => {
+                  dispatch(setConfirmPassword(text));
+                }}
                 placeholder="Confirm your new password"
                 secureTextEntry={hideConfirmPassword}
+                autoCapitalize="none"
+                value={confirmPassword}
               />
               <TouchableOpacity
                 onPress={() => setHideConfirmPassword(!hideConfirmPassword)}
