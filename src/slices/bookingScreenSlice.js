@@ -14,6 +14,8 @@ const initialState = {
   rezervations: [],
   hotelsData: [],
   roomTypeData: [],
+  data: [{ rezervations: [], hotelsData: [], roomTypeData: [] }],
+  newData: [{ rezervation: {}, hotelData: {}, roomType: {} }],
   status: "idle",
   error: null,
 };
@@ -32,7 +34,7 @@ export const getRezervations = createAsyncThunk(
       return {
         id: id,
         hotelId: rezervationsData.hotelId,
-        roomTypeId: rezervationsData.roomTypeId.id,
+        roomTypeId: rezervationsData.roomTypeId,
         guestCount: rezervationsData.guestCount,
         childCount: rezervationsData.childCount,
         adultCount: rezervationsData.adultCount,
@@ -43,9 +45,74 @@ export const getRezervations = createAsyncThunk(
         userId: rezervationsData.userId,
       };
     });
-    var hotelRefData = await getDoc(rezervations[0].hotelId);
-    console.log("data:", hotelRefData.data());
-    return rezervations;
+    const hotelsDataPromises = rezervations.map(async (item) => {
+      try {
+        const hotelDoc = await getDoc(item.hotelId);
+        const dataHotel = hotelDoc.data();
+        return {
+          country: dataHotel.country,
+          city: dataHotel.city,
+          location: dataHotel.location,
+          image: dataHotel.image,
+          description: dataHotel.description,
+          rating: dataHotel.rating,
+          name: dataHotel.name,
+        };
+      } catch (error) {
+        console.error("e", error);
+        throw error; // Hata oluşursa dışarıya at
+      }
+    });
+
+    // Tüm asenkron işlemlerin tamamlanmasını bekleyin ve sonuçları alın
+    const hotelsData = await Promise.all(hotelsDataPromises);
+
+    const roomTypeDataPromises = rezervations.map(async (item) => {
+      try {
+        const roomTypeDoc = await getDoc(item.roomTypeId);
+        const dataRoomType = roomTypeDoc.data();
+        return {
+          capacity: dataRoomType.capacity,
+          description: dataRoomType.description,
+          hotelId: dataRoomType.hotelId,
+          name: dataRoomType.name,
+          numberOfRoom: dataRoomType.numberOfRoom,
+          price_per_night: dataRoomType.price_per_night,
+        };
+      } catch (error) {
+        console.error("e", error);
+        throw error; // Hata oluşursa dışarıya at
+      }
+    });
+
+    // Tüm asenkron işlemlerin tamamlanmasını bekleyin ve sonuçları alın
+    const roomTypeData = await Promise.all(roomTypeDataPromises);
+    const data = [
+      {
+        rezervations: rezervations,
+        hotelsData: hotelsData,
+        roomTypeData: roomTypeData,
+      },
+    ];
+    const newData = [];
+    data.forEach((item) => {
+      const length = Math.max(
+        item.rezervations.length,
+        item.hotelsData.length,
+        item.roomTypeData.length
+      );
+      for (let i = 0; i < length; i++) {
+        const rezervation = item.rezervations[i] || {};
+        const hotelData = item.hotelsData[i] || {};
+        const roomType = item.roomTypeData[i] || {};
+        newData.push({
+          rezervation,
+          hotelData,
+          roomType,
+        });
+      }
+    });
+    return newData;
   }
 );
 
@@ -82,6 +149,12 @@ const bookingScreenSlice = createSlice({
     setHotelsData: (state, action) => {
       state.hotelsData = action.payload;
     },
+    setData: (state, action) => {
+      state.data = action.payload;
+    },
+    setNewData: (state, action) => {
+      state.newData = action.payload;
+    },
   },
   extraReducers(builder) {
     builder.addCase(getRezervations.pending, (state, action) => {
@@ -93,7 +166,7 @@ const bookingScreenSlice = createSlice({
     });
     builder.addCase(getRezervations.fulfilled, (state, action) => {
       state.status = "idle";
-      state.rezervations = action.payload;
+      state.newData = action.payload;
     });
     builder.addCase(getHotelDataOfRezervations.pending, (state, action) => {
       state.status = "loading";
@@ -111,7 +184,10 @@ const bookingScreenSlice = createSlice({
 
 export const selectRezervations = (state) => state.bookingScreen.rezervations;
 export const selectHotelsData = (state) => state.bookingScreen.hotelsData;
+export const selectData = (state) => state.bookingScreen.data;
+export const selectNewData = (state) => state.bookingScreen.newData;
 export const selectStatus = (state) => state.bookingScreen.status;
 export const selectError = (state) => state.bookingScreen.error;
-export const { setRezervations, setHotelsData } = bookingScreenSlice.actions;
+export const { setRezervations, setHotelsData, setData } =
+  bookingScreenSlice.actions;
 export default bookingScreenSlice;

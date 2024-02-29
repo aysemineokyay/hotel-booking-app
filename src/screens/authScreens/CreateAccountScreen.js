@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Platform,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useHeaderHeight } from "@react-navigation/elements";
@@ -41,7 +42,10 @@ const CreateAccountScreen = () => {
           console.log(userCredential);
           sendEmailVerification(userCredential.user)
             .then(() => {
-              alert(`Doğrulama maili gönderildi: ${userCredential.user.email}`);
+              Alert.alert(
+                "Başarılı",
+                `Doğrulama maili gönderildi: ${userCredential.user.email}`
+              );
             })
             .catch((error) => {
               console.log(error);
@@ -51,16 +55,19 @@ const CreateAccountScreen = () => {
         .catch((error) => {
           switch (error.code) {
             case "auth/email-already-in-use":
-              alert("Girmiş olduğunuz email adresi kullanılıyor.");
+              Alert.alert(
+                "Uyarı",
+                "Girmiş olduğunuz email adresi kullanılıyor."
+              );
               break;
             case "auth/invalid-email":
-              alert("Geçersiz email adresi girdiniz.");
+              Alert.alert("Hata", "Geçersiz email adresi girdiniz.");
               break;
             case "auth/operation-not-allowed":
-              alert("Bir hata oluştu.");
+              Alert.alert("Hata", "Bir hata oluştu.");
               break;
             case "auth/weak-password":
-              alert("Lütfen daha güçlü bir şifre belirleyiniz.");
+              Alert.alert("Uyarı", "Lütfen daha güçlü bir şifre belirleyiniz.");
               break;
             default:
               console.log(error.message);
@@ -68,7 +75,7 @@ const CreateAccountScreen = () => {
           }
         });
     } else {
-      alert("Şifreler birbiriyle aynı değil!");
+      Alert.alert("Hata", "Şifreler birbiriyle aynı değil.");
     }
   };
   return (

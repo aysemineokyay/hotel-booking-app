@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
@@ -44,18 +45,21 @@ const LoginScreen = () => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        alert(`Giriş başarılı: ${userCredential.user.email}`);
+        Alert.alert("Başarılı", `Hoşgeldin ${userCredential.user.email}`);
       })
       .catch((error) => {
         switch (error.code) {
           case "auth/invalid-email":
-            alert("Geçersiz email adresi girdiniz.");
+            Alert.alert("Hata", "Geçersiz email adresi girdiniz.");
             break;
           case "auth/invalid-credential":
-            alert("Geçersiz email veya şifre girdiniz.");
+            Alert.alert("Hata", "Geçersiz email veya şifre girdiniz.");
+            break;
+          case "auth/too-many-requests":
+            Alert.alert("Hata", "Çok sayıda hatalı giriş yapıldı.");
             break;
           case "auth/operation-not-allowed":
-            alert("Bir hata oluştu.");
+            Alert.alert("Hata", "Bir hata oluştu.");
             break;
           default:
             console.log(error.message);
@@ -82,6 +86,7 @@ const LoginScreen = () => {
             }}
             inputMode="email"
             autoCapitalize="none"
+            value={email}
           />
         </View>
       </View>
@@ -98,6 +103,7 @@ const LoginScreen = () => {
               onChangeText={(text) => {
                 dispatch(setPassword(text));
               }}
+              value={password}
             />
           </View>
           <View style={styles.passwordInputRightSide}>
