@@ -45,7 +45,7 @@ const BookingScreen = () => {
       </View>
     );
   }
-  if (status === "idle" && newData[0].rezervation.length === 0) {
+  if (status === "idle" && newData.length === 0) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Rezervasyon bulunmamaktadır.</Text>
@@ -53,7 +53,7 @@ const BookingScreen = () => {
     );
   }
   console.log("fggfgfgffffff", newData);
-  console.log("tttt", newData[0].roomType);
+  console.log("tttt", newData[0].rezervation);
   console.log("qqqq", data[0].hotelsData);
   return (
     <View style={styles.container}>
