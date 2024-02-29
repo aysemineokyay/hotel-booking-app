@@ -14,6 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import {
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
@@ -67,6 +68,16 @@ const LoginScreen = () => {
         }
       });
   };
+  const handleForgotPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Alert.alert("Başarılı", `Parola sıfırlama maili gönderildi: ${email}`);
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert("Hata", error.message);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -86,7 +97,6 @@ const LoginScreen = () => {
             }}
             inputMode="email"
             autoCapitalize="none"
-            value={email}
           />
         </View>
       </View>
@@ -103,7 +113,6 @@ const LoginScreen = () => {
               onChangeText={(text) => {
                 dispatch(setPassword(text));
               }}
-              value={password}
             />
           </View>
           <View style={styles.passwordInputRightSide}>
@@ -167,11 +176,16 @@ const LoginScreen = () => {
                     onChangeText={(text) => {
                       dispatch(setEmail(text));
                     }}
+                    autoCapitalize="none"
+                    inputMode="email"
                   />
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.modalButton}>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={handleForgotPassword}
+              >
                 <Text style={styles.closeModalText}>Send Code</Text>
               </TouchableOpacity>
             </View>
@@ -315,7 +329,7 @@ const styles = StyleSheet.create({
   topContainerLeftSide: {
     paddingTop: 20,
   },
-  topContainerRightSide: {paddingHorizontal:5,},
+  topContainerRightSide: { paddingHorizontal: 5 },
 
   modalTextHeader: {
     fontSize: 18,

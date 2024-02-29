@@ -41,7 +41,11 @@ const ChangePasswordScreen = (navigation) => {
   const height = useHeaderHeight();
 
   const handleChangePassword = () => {
-    if (newPassword === confirmPassword) {
+    if (newPassword === password) {
+      Alert.alert("Uyarı", "Yeni şifreniz eski şifreniz ile aynı olamaz");
+    } else if (newPassword !== confirmPassword) {
+      Alert.alert("Hata", "Şifreler birbiriyle aynı değil!");
+    } else if (newPassword === confirmPassword) {
       const user = auth.currentUser;
       const credential = EmailAuthProvider.credential(user.email, password);
       console.log("credential", credential);
@@ -69,8 +73,6 @@ const ChangePasswordScreen = (navigation) => {
           );
           console.error("Yeniden doğrulama hatası:", error);
         });
-    } else {
-      alert("Şifreler birbiriyle aynı değil!");
     }
   };
 
