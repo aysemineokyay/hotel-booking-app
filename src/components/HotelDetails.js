@@ -51,8 +51,7 @@ const HotelDetails = (props) => {
     }
   };
   const handleTabPress = (tabTitle) => {
-    setSelectedTab(tabTitle);
-    console.log(`${tabTitle} sekmesine geçildi`);
+    setSelectedTab(tabTitle);  
   };
 
   const navigation = useNavigation();

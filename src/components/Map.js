@@ -9,10 +9,8 @@ import { useNavigation } from "@react-navigation/native";
 const Map = () => {
   const location = useLocation();
   const data = useCompass();
-  console.log(data);
-
   const navigation = useNavigation();
-
+  
   const hotelLatitude = 36.8848; 
   const hotelLongitude = 30.7040; 
   const initialRegion = location
