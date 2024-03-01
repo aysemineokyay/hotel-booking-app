@@ -190,7 +190,7 @@ const EditProfileScreen = () => {
           <MaterialCommunityIcons
             name="account-circle-outline"
             size={35}
-            color="blue"
+            color="black"
           />
           <TextInput
             style={styles.input}
@@ -200,7 +200,7 @@ const EditProfileScreen = () => {
           />
         </View>
         <View style={styles.inputContainer}>
-          <Ionicons name="mail-outline" size={35} color="blue" />
+          <Ionicons name="mail-outline" size={35} color="black" />
           <TextInput
             style={styles.input}
             placeholder="Email address"
@@ -215,7 +215,7 @@ const EditProfileScreen = () => {
       <TouchableOpacity
         onPress={handleSaveChanges}
         style={{
-          backgroundColor: "blue",
+          backgroundColor: "#448178",
           paddingHorizontal: 30,
           paddingVertical: 10,
           borderRadius: 15,
