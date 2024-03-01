@@ -9,7 +9,7 @@ const FooterInfo = () => {
       </View>
       <View>
         <TouchableOpacity style={styles.button} >
-          <Text style={styles.buttonText}>Rezervasyon Yap</Text>
+          <Text style={styles.buttonText}>Reservation</Text>
         </TouchableOpacity>
       </View>
     </View>

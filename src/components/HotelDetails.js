@@ -19,7 +19,7 @@ import Details from "./Details";
 import TripPlan from "./TripPlan";
 import Reviews from "./Reviews";
 import FooterInfo from "./FooterInfo";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const hotelData = [
   { placeImage: require("../../data/otel1.jpg") },
@@ -28,21 +28,21 @@ const hotelData = [
   { placeImage: require("../../data/otel2.jpg") },
 ];
 const HotelDetails = (props) => {
-  const [selectedTab, setSelectedTab] = useState("Detaylar");
+  const [selectedTab, setSelectedTab] = useState("Details");
   const renderContent = () => {
-    if (selectedTab === "Detaylar") {
+    if (selectedTab === "Details") {
       return (
         <ScrollView>
           <Details />
         </ScrollView>
       );
-    } else if (selectedTab === "Seyahat Planı") {
+    } else if (selectedTab === "Trip Plan") {
       return (
         <ScrollView>
           <TripPlan />
         </ScrollView>
       );
-    } else if (selectedTab === "Yorumlar") {
+    } else if (selectedTab === "Review") {
       return (
         <ScrollView>
           <Reviews />
@@ -50,7 +50,6 @@ const HotelDetails = (props) => {
       );
     }
   };
-
   const handleTabPress = (tabTitle) => {
     setSelectedTab(tabTitle);
     console.log(`${tabTitle} sekmesine geçildi`);
@@ -70,7 +69,7 @@ const HotelDetails = (props) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Carousel
         data={hotelData}
         renderItem={renderCarouselItem}
@@ -84,7 +83,7 @@ const HotelDetails = (props) => {
         onPress={() => navigation.goBack()}
       >
         <Ionicons name="chevron-back" size={20} color="white" />
-        <Text style={styles.backButtonText}>Geri</Text>
+        <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
 
       <View>
@@ -104,7 +103,7 @@ const HotelDetails = (props) => {
       </View>
 
       <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonText}>Haritada Gör</Text>
+        <Text style={styles.buttonText}>Show on map</Text>
       </TouchableOpacity>
 
       <HotelDetailsButton
@@ -114,7 +113,7 @@ const HotelDetails = (props) => {
       {renderContent()}
 
       <FooterInfo />
-    </SafeAreaView>
+    </View>
   );
 };
 

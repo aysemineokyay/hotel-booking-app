@@ -1,10 +1,7 @@
 import {
   StyleSheet,
-  Text,
-  SafeAreaView,
   FlatList,
-  View,
-  ScrollView,
+  View, 
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import HomeScreen_Header from "../../components/HomeScreen_Header";

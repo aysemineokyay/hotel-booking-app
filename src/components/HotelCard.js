@@ -1,25 +1,23 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { EvilIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 const HotelCard = (props) => {
-  console.log(props);
+ 
   const navigation = useNavigation();
   const handlePress = () => {
     // @ts-ignore
     navigation.navigate("Detail");
   };
-
   return (
-    <SafeAreaView>
-      <TouchableOpacity style={styles.container} onPress={handlePress}>
+  
+      <TouchableOpacity style={styles.cardContainer} onPress={handlePress}>
         <View>
           <Image style={styles.image} source={{ uri: props.placeImage }} />
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.hotelName}>{props.hotelName}</Text>
+        <View style={styles.textContainer}  >
+          <Text style={styles.hotelName} numberOfLines={2} ellipsizeMode="tail">{props.hotelName}</Text>
           <View style={styles.placeContainer}>
             <EvilIcons
               name="location"
@@ -32,24 +30,27 @@ const HotelCard = (props) => {
           <Text style={styles.newPrice}>${props.newPrice}</Text>
         </View>
       </TouchableOpacity>
-    </SafeAreaView>
+   
   );
 };
 
 export default HotelCard;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginVertical: 5,
+ 
+  cardContainer: {
+    marginVertical: 15,
     marginHorizontal: 10,
+    width: Dimensions.get("window").width / 9 * 4,
   },
   image: {
     width: 160,
     height: 160,
     borderRadius: 15,
+    resizeMode: "cover",
   },
   textContainer: {
+
     alignItems: "flex-start",
     marginTop: 10,
     marginLeft: 10,
@@ -66,10 +67,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
 
-  icon: {
-    margin: 0,
-    paddingLeft: 0,
-  },
+  icon: {},
 
   place: {
     fontSize: 12,
