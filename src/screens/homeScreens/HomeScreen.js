@@ -16,6 +16,7 @@ import {
   selectError,
   selectStatus,
 } from "../../slices/homeScreenSlice";
+import { Text } from "react-native";
 
 const HomeScreen = () => {
   const [list, setList] = useState();
