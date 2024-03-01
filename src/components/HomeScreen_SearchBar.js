@@ -5,23 +5,22 @@ import { EvilIcons } from "@expo/vector-icons";
 
 const HomeScreen_SearchBar = (props) => {
   return (
-    <SafeAreaView>
+    <View>
       <View style={styles.container}>
         <EvilIcons name="location" size={24} color="black" />
         <TextInput
-          placeholder="Şehir, ilçe veya tatil bölgesi giriniz"
+          placeholder="Search your hotel..."
           onChangeText={props.onSearch}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default HomeScreen_SearchBar;
 
 const styles = StyleSheet.create({
-  container: {
- 
+  container: { 
     flexDirection: "row",
     gap: 10,
     alignItems: "center",
@@ -32,6 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 15,
     marginHorizontal: 16,
-    marginBottom:5,
+    marginTop:30,
+    marginBottom:30,
   },
 });

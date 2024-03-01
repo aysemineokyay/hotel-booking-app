@@ -16,19 +16,19 @@ const ButtonsCategory = ({ onTabPress, selectedTab }) => {
   return (
     <View style={styles.container}>
       <CustomButton
-        title='Detaylar'
-        onPress={() => onTabPress('Detaylar')}
-        isActive={selectedTab === 'Detaylar'}
+        title='Details'
+        onPress={() => onTabPress('Details')}
+        isActive={selectedTab === 'Details'}
       />
       <CustomButton
-        title='Seyahat Planı'
-        onPress={() => onTabPress('Seyahat Planı')}
-        isActive={selectedTab === 'Seyahat Planı'}
+        title='Trip Plan'
+        onPress={() => onTabPress('Trip Plan')}
+        isActive={selectedTab === 'Trip Plan'}
       />
        <CustomButton
-        title='Yorumlar'
-        onPress={() => onTabPress('Yorumlar')}
-        isActive={selectedTab === 'Yorumlar'}
+        title='Review'
+        onPress={() => onTabPress('Review')}
+        isActive={selectedTab === 'Review'}
       />
     </View>
   )

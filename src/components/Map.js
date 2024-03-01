@@ -4,15 +4,13 @@ import useLocation from "../hooks/useLocation";
 import useCompass from "../hooks/useCompass";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const Map = () => {
   const location = useLocation();
   const data = useCompass();
-  console.log(data);
-
   const navigation = useNavigation();
-
+  
   const hotelLatitude = 36.8848; 
   const hotelLongitude = 30.7040; 
   const initialRegion = location
@@ -33,13 +31,13 @@ const Map = () => {
     : null;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}
       >
         <Ionicons name="chevron-back" size={20} color="grey" />
-        <Text style={styles.backButtonText}>Geri</Text>
+        <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
       <MapView 
       style={styles.map} 
@@ -60,7 +58,7 @@ const Map = () => {
           </Marker>
         )}
       </MapView>
-    </SafeAreaView>
+    </View>
   );
 };
 
