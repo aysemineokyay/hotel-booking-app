@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Platform,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useHeaderHeight } from "@react-navigation/elements";
@@ -25,6 +26,7 @@ import {
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
 
@@ -34,33 +36,46 @@ const CreateAccountScreen = () => {
   const confirmPassword = useSelector(selectConfirmPassword);
   const dispatch = useDispatch();
   const height = useHeaderHeight();
+  const [username, setUsername] = useState(null);
   const handleSignup = () => {
     if (password === confirmPassword) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          console.log(userCredential);
-          sendEmailVerification(userCredential.user)
+          updateProfile(auth.currentUser, {
+            displayName: username, // Burada istediğiniz display name'i belirtin
+          })
             .then(() => {
-              alert(`Doğrulama maili gönderildi: ${userCredential.user.email}`);
+              sendEmailVerification(userCredential.user);
+            })
+            .then(() => {
+              // E-posta doğrulama gönderildi
+              Alert.alert(
+                "Başarılı",
+                `Doğrulama maili gönderildi: ${userCredential.user.email}`
+              );
             })
             .catch((error) => {
+              // Hata oluştu
               console.log(error);
-              alert(error);
+              Alert.alert("Error", error.message);
             });
         })
         .catch((error) => {
           switch (error.code) {
             case "auth/email-already-in-use":
-              alert("Girmiş olduğunuz email adresi kullanılıyor.");
+              Alert.alert(
+                "Uyarı",
+                "Girmiş olduğunuz email adresi kullanılıyor."
+              );
               break;
             case "auth/invalid-email":
-              alert("Geçersiz email adresi girdiniz.");
+              Alert.alert("Hata", "Geçersiz email adresi girdiniz.");
               break;
             case "auth/operation-not-allowed":
-              alert("Bir hata oluştu.");
+              Alert.alert("Hata", "Bir hata oluştu.");
               break;
             case "auth/weak-password":
-              alert("Lütfen daha güçlü bir şifre belirleyiniz.");
+              Alert.alert("Uyarı", "Lütfen daha güçlü bir şifre belirleyiniz.");
               break;
             default:
               console.log(error.message);
@@ -68,7 +83,7 @@ const CreateAccountScreen = () => {
           }
         });
     } else {
-      alert("Şifreler birbiriyle aynı değil!");
+      Alert.alert("Hata", "Şifreler birbiriyle aynı değil.");
     }
   };
   return (
@@ -80,6 +95,15 @@ const CreateAccountScreen = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
           <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>User Name</Text>
+            <View style={styles.inputWithIcon}>
+              <Icon name="lock" size={24} color="#000" style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => setUsername(text)}
+                placeholder="Enter your user name"
+              />
+            </View>
             <Text style={styles.inputLabel}>Email Address</Text>
             <View style={styles.inputWithIcon}>
               <Icon name="lock" size={24} color="#000" style={styles.icon} />
@@ -162,7 +186,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   buttonContainer: {
-    marginTop: "50%",
+    marginTop: "40%",
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 10,

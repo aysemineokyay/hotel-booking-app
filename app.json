@@ -23,6 +23,16 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "expo": {
+      "plugins": [
+        [
+          "expo-image-picker",
+          {
+            "photosPermission": "Profil görseli yükleyebilmek için fotoğraflara erişim iznine ihtiyacımız var."
+          }
+        ]
+      ]
     }
   }
 }

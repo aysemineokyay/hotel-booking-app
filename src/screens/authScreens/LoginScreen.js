@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
@@ -13,6 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import {
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
@@ -44,23 +46,36 @@ const LoginScreen = () => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        alert(`Giriş başarılı: ${userCredential.user.email}`);
+        Alert.alert("Başarılı", `Hoşgeldin ${userCredential.user.email}`);
       })
       .catch((error) => {
         switch (error.code) {
           case "auth/invalid-email":
-            alert("Geçersiz email adresi girdiniz.");
+            Alert.alert("Hata", "Geçersiz email adresi girdiniz.");
             break;
           case "auth/invalid-credential":
-            alert("Geçersiz email veya şifre girdiniz.");
+            Alert.alert("Hata", "Geçersiz email veya şifre girdiniz.");
+            break;
+          case "auth/too-many-requests":
+            Alert.alert("Hata", "Çok sayıda hatalı giriş yapıldı.");
             break;
           case "auth/operation-not-allowed":
-            alert("Bir hata oluştu.");
+            Alert.alert("Hata", "Bir hata oluştu.");
             break;
           default:
             console.log(error.message);
             break;
         }
+      });
+  };
+  const handleForgotPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Alert.alert("Başarılı", `Parola sıfırlama maili gönderildi: ${email}`);
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert("Hata", error.message);
       });
   };
 
@@ -161,11 +176,16 @@ const LoginScreen = () => {
                     onChangeText={(text) => {
                       dispatch(setEmail(text));
                     }}
+                    autoCapitalize="none"
+                    inputMode="email"
                   />
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.modalButton}>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={handleForgotPassword}
+              >
                 <Text style={styles.closeModalText}>Send Code</Text>
               </TouchableOpacity>
             </View>
@@ -309,7 +329,7 @@ const styles = StyleSheet.create({
   topContainerLeftSide: {
     paddingTop: 20,
   },
-  topContainerRightSide: {paddingHorizontal:5,},
+  topContainerRightSide: { paddingHorizontal: 5 },
 
   modalTextHeader: {
     fontSize: 18,
