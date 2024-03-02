@@ -97,6 +97,7 @@ const LoginScreen = () => {
             }}
             inputMode="email"
             autoCapitalize="none"
+            value={email}
           />
         </View>
       </View>
@@ -113,6 +114,7 @@ const LoginScreen = () => {
               onChangeText={(text) => {
                 dispatch(setPassword(text));
               }}
+              value={password}
             />
           </View>
           <View style={styles.passwordInputRightSide}>
