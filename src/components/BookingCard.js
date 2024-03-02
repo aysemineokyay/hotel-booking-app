@@ -24,7 +24,7 @@ const BookingCard = ({ dataBooking }) => {
               <Text style={{ color: "#448178", fontWeight: "bold" }}>
                 ₺{dataBooking.roomType.price_per_night}{" "}
               </Text>
-              <Text style={styles.text}>/ Gece</Text>
+              <Text style={styles.text}>/ Night</Text>
             </View>
             <Text style={{ color: "gold", fontWeight: "bold" }}>
               <AntDesign name="star" size={16} color="gold" />
@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "column",
     marginBottom: 20,
-    borderColor: "#FBFBFD",
+    borderColor: "#F5F5F5",
     borderWidth: 2,
-    backgroundColor: "#FBFBFD",
+    backgroundColor: "#F5F5F5",
     borderRadius: 25,
     padding: 10,
     gap: 10,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingVertical: 5,
     paddingHorizontal: 5,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: "center",
   },
   text: { color: "#00000088" },

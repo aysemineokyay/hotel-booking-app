@@ -16,18 +16,23 @@ const HomeRoutes = () => {
         headerShadowVisible: false,
         headerTintColor: "black",
         headerTitle: "",
-        
       }}
-          >
+    >
       <Stack.Screen
         name="MyBottomTabNavigator"
         component={MyBottomTabNavigator}
         options={{ headerShown: false }}
       />
-       <Stack.Screen name="Detail" component={HotelDetails} options={{ headerShown: false }}/>
-       <Stack.Screen name="Map" component={Map} options={{ headerShown: false }}/>
-       <Stack.Screen  name="LoginAccount" component={LoginAccountScreen} options={{ headerShown: false }}/>
-
+      <Stack.Screen
+        name="HotelDetails"
+        component={HotelDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Map"
+        component={Map}
+        options={{ headerShown: false }}
+      />
 
       <Stack.Screen
         name="EditProfileScreen"

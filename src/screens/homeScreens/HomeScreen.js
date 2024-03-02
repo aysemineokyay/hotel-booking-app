@@ -1,16 +1,22 @@
 import {
   StyleSheet,
   FlatList,
-  View, 
+  View,
+  ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import HomeScreen_Header from "../../components/HomeScreen_Header";
 import HomeScreen_SearchBar from "../../components/HomeScreen_SearchBar";
 import HotelCard from "../../components/HotelCard";
-import hotel_data from "../../../data/hotel_data.json";
 import { useDispatch, useSelector } from "react-redux";
-import { getHotels, selectHotels } from "../../slices/homeScreenSlice";
-import { selectError, selectStatus } from "../../slices/bookingScreenSlice";
+import {
+  getHotels,
+  selectHotels,
+  selectError,
+  selectStatus,
+} from "../../slices/homeScreenSlice";
+import { Text } from "react-native";
 
 const HomeScreen = () => {
   const [list, setList] = useState();
@@ -21,16 +27,16 @@ const HomeScreen = () => {
   useEffect(() => {
     dispatch(getHotels());
   }, []);
+  if (status === "loading") {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
   // console.log("hotels", hotels[0].name);
-  const renderHotel = ({ item }) => (
-    <HotelCard
-      id={item.id}
-      place={item.city}
-      placeImage={item.image}
-      hotelName={item.name}
-      newPrice={item.rating}
-    />
-  );
+  const renderHotel = ({ item }) => <HotelCard data={item} />;
 
   const handleSearch = (text) => {
     const filteredList = hotels[0].filter((place) => {
