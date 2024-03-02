@@ -22,13 +22,7 @@ import TripPlan from "./TripPlan";
 import Reviews from "./Reviews";
 import FooterInfo from "./FooterInfo";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getHotelsAndRoomTypes,
-  selectData,
-  selectError,
-  selectHotels,
-  selectStatus,
-} from "../slices/homeScreenSlice";
+import { getHotelsAndRoomTypes, selectData, selectError, selectHotels, selectStatus } from "../slices/homeScreenSlice";
 
 const HotelDetails = ({ route }) => {
   const hotels = useSelector(selectHotels);
@@ -41,7 +35,7 @@ const HotelDetails = ({ route }) => {
   useEffect(() => {
     dispatch(getHotelsAndRoomTypes(dataHotel.data.ref));
   }, []);
-  console.log("dataaaaaaaa", data[0].roomTypes);
+  // console.log("dataaaaaaaa", data[0].roomTypes);
   const [selectedTab, setSelectedTab] = useState("Details");
   const renderContent = () => {
     if (selectedTab === "Details") {
@@ -126,10 +120,7 @@ const HotelDetails = ({ route }) => {
         showsHorizontalScrollIndicator={true}
         decelerationRate={"fast"}
       />
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
         <Ionicons name="chevron-back" size={20} color="black" />
         <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
@@ -151,22 +142,15 @@ const HotelDetails = ({ route }) => {
       </View>
 
       <TouchableOpacity style={styles.button} onPress={onPress}>
-        <ImageBackground
-          source={require("../../assets/map.png")}
-          resizeMode="cover"
-          style={styles.mapContainer}
-        >
+        <ImageBackground source={require("../../assets/map.png")} resizeMode="cover" style={styles.mapContainer}>
           <Text style={styles.buttonText}>Show on map</Text>
         </ImageBackground>
       </TouchableOpacity>
 
-      <HotelDetailsButton
-        onTabPress={handleTabPress}
-        selectedTab={selectedTab}
-      />
+      <HotelDetailsButton onTabPress={handleTabPress} selectedTab={selectedTab} />
       {renderContent()}
 
-      <FooterInfo />
+      <FooterInfo data={dataHotel} />
     </View>
   );
 };
