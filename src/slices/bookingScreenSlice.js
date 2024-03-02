@@ -57,6 +57,7 @@ export const getRezervations = createAsyncThunk(
           description: dataHotel.description,
           rating: dataHotel.rating,
           name: dataHotel.name,
+          detail_images: dataHotel.detail_images,
         };
       } catch (error) {
         console.error("e", error);

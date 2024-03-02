@@ -36,15 +36,7 @@ const HomeScreen = () => {
     );
   }
   // console.log("hotels", hotels[0].name);
-  const renderHotel = ({ item }) => (
-    <HotelCard
-      id={item.id}
-      place={item.city}
-      placeImage={item.image}
-      hotelName={item.name}
-      newPrice={item.rating}
-    />
-  );
+  const renderHotel = ({ item }) => <HotelCard data={item} />;
 
   const handleSearch = (text) => {
     const filteredList = hotels[0].filter((place) => {

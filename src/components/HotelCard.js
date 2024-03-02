@@ -1,47 +1,52 @@
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import { EvilIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const HotelCard = (props) => {
- 
+const HotelCard = ({ data }) => {
   const navigation = useNavigation();
   const handlePress = () => {
     // @ts-ignore
-    navigation.navigate("Detail");
+    navigation.navigate("HotelDetails", { data: data });
   };
   return (
-  
-      <TouchableOpacity style={styles.cardContainer} onPress={handlePress}>
-        <View>
-          <Image style={styles.image} source={{ uri: props.placeImage }} />
+    <TouchableOpacity style={styles.cardContainer} onPress={handlePress}>
+      <View>
+        <Image style={styles.image} source={{ uri: data.image }} />
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.hotelName} numberOfLines={2} ellipsizeMode="tail">
+          {data.name}
+        </Text>
+        <View style={styles.placeContainer}>
+          <EvilIcons
+            name="location"
+            size={18}
+            color="#767676"
+            style={styles.icon}
+          />
+          <Text style={styles.place}>{data.city}</Text>
         </View>
-        <View style={styles.textContainer}  >
-          <Text style={styles.hotelName} numberOfLines={2} ellipsizeMode="tail">{props.hotelName}</Text>
-          <View style={styles.placeContainer}>
-            <EvilIcons
-              name="location"
-              size={18}
-              color="#767676"
-              style={styles.icon}
-            />
-            <Text style={styles.place}>{props.place}</Text>
-          </View>
-          <Text style={styles.newPrice}>${props.newPrice}</Text>
-        </View>
-      </TouchableOpacity>
-   
+        <Text style={styles.newPrice}>${data.rating}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 export default HotelCard;
 
 const styles = StyleSheet.create({
- 
   cardContainer: {
     marginVertical: 15,
     marginHorizontal: 10,
-    width: Dimensions.get("window").width / 9 * 4,
+    width: (Dimensions.get("window").width / 9) * 4,
   },
   image: {
     width: 160,
@@ -50,7 +55,6 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   textContainer: {
-
     alignItems: "flex-start",
     marginTop: 10,
     marginLeft: 10,
