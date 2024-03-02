@@ -6,7 +6,6 @@ import HotelDetails from "../components/HotelDetails";
 import EditProfileScreen from "../components/EditProfileScreen";
 import ChangePasswordScreen from "../components/ChangePasswordScreen";
 import Map from "../components/Map";
-import LoginAccountScreen from "../components/LoginAccountScreen";
 import BookingNewScreen from "../screens/homeScreens/BookingNewScreen";
 
 const HomeRoutes = () => {

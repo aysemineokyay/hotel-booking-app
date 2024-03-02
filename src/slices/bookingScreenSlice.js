@@ -5,6 +5,7 @@ import {
   getDocs,
   query,
   where,
+  addDoc
 } from "firebase/firestore";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
@@ -140,6 +141,12 @@ export const getHotelDataOfRezervations = createAsyncThunk(
     return hotels;
   }
 );
+export const addRezervation = async (data) => {
+  const rezervationsRef = collection(db, "rezervations");
+  var response = await addDoc(rezervationsRef, data);
+  console.log("response:", response);
+  return;
+};
 const bookingScreenSlice = createSlice({
   name: "bookingScreen",
   initialState: initialState,

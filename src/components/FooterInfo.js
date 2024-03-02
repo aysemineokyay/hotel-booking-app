@@ -3,10 +3,10 @@ import { useNavigation } from "@react-navigation/native";
 
 const FooterInfo = ({ data }) => {
   const navigation = useNavigation();
-  const handlePress = () => {
+  const handlePress = (data) => {
     console.log("hotel data:", data.data);
     // @ts-ignore
-    navigation.navigate("BookingNew", { hotelData: data });
+    navigation.navigate("BookingNew", { hotelData: data.data });
   };
   return (
     <View style={styles.container}>
@@ -14,7 +14,7 @@ const FooterInfo = ({ data }) => {
         <Text style={styles.text}>$200.00</Text>
       </View>
       <View>
-        <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <TouchableOpacity style={styles.button} onPress={() => handlePress(data)}>
           <Text style={styles.buttonText}>Book Now</Text>
         </TouchableOpacity>
       </View>
