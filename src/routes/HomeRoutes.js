@@ -6,7 +6,9 @@ import HotelDetails from "../components/HotelDetails";
 import EditProfileScreen from "../components/EditProfileScreen";
 import ChangePasswordScreen from "../components/ChangePasswordScreen";
 import Map from "../components/Map";
+
 import BookingNewScreen from "../screens/homeScreens/BookingNewScreen";
+
 
 const HomeRoutes = () => {
   const Stack = createNativeStackNavigator();
@@ -18,6 +20,7 @@ const HomeRoutes = () => {
         headerTitle: "",
       }}
     >
+
       <Stack.Screen name="MyBottomTabNavigator" component={MyBottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="HotelDetails" component={HotelDetails} options={{ headerShown: false }} />
       <Stack.Screen name="BookingNew" component={BookingNewScreen} options={{ headerShown: false }} />

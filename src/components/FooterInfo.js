@@ -16,6 +16,7 @@ const FooterInfo = ({ data }) => {
       <View>
         <TouchableOpacity style={styles.button} onPress={() => handlePress(data)}>
           <Text style={styles.buttonText}>Book Now</Text>
+
         </TouchableOpacity>
       </View>
     </View>
@@ -26,17 +27,12 @@ export default FooterInfo;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 30,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 40,
-    backgroundColor: "#FFFFFF",
-    paddingBottom: 20,
-    marginBottom: "auto",
-  },
-  textContainer: {
-    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-between",
+    width: "100%",
   },
   text: {
     fontSize: 18,

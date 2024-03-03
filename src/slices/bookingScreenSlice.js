@@ -61,7 +61,7 @@ export const getRezervations = createAsyncThunk(
           detail_images: dataHotel.detail_images,
         };
       } catch (error) {
-        console.error("e", error);
+        console.error("ewww", error);
         throw error; // Hata oluşursa dışarıya at
       }
     });
@@ -82,7 +82,7 @@ export const getRezervations = createAsyncThunk(
           price_per_night: dataRoomType.price_per_night,
         };
       } catch (error) {
-        console.error("e", error);
+        console.error("egggg", error);
         throw error; // Hata oluşursa dışarıya at
       }
     });
