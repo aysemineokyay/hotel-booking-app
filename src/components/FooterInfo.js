@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const FooterInfo = ({ data }) => {
@@ -9,16 +9,12 @@ const FooterInfo = ({ data }) => {
   };
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.text}>$</Text>
-      </View>
-      <View>
-        <TouchableOpacity
-          style={styles.button}
+      <View style={styles.button}>
+        <Button
+          title="Book Now"
+          color="white"
           onPress={() => handlePress(data)}
-        >
-          <Text style={styles.buttonText}>Book Now</Text>
-        </TouchableOpacity>
+        />
       </View>
     </View>
   );
@@ -32,7 +28,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     alignContent: "center",
-    justifyContent: "space-between",
     width: "100%",
   },
   text: {
@@ -41,13 +36,11 @@ const styles = StyleSheet.create({
     color: "black",
   },
   button: {
-    width: 180,
-    height: 40,
-    backgroundColor: "green",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 10,
-    padding: 10,
+    backgroundColor: "#448178",
+    width: "100%",
   },
   buttonText: {
     fontSize: 14,

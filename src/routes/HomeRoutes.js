@@ -35,7 +35,10 @@ const HomeRoutes = () => {
       <Stack.Screen
         name="BookingNew"
         component={BookingNewScreen}
-        options={{ headerShown: true }}
+        options={{
+          headerShown: true,
+          contentStyle: { backgroundColor: "white" },
+        }}
       />
       <Stack.Screen
         name="Map"

@@ -20,7 +20,7 @@ const HomeScreen_SearchBar = (props) => {
 export default HomeScreen_SearchBar;
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     flexDirection: "row",
     gap: 10,
     alignItems: "center",
@@ -30,8 +30,7 @@ const styles = StyleSheet.create({
     borderColor: "#D9D9D9",
     borderWidth: 1,
     borderRadius: 15,
-    marginHorizontal: 16,
-    marginTop:30,
-    marginBottom:30,
+    marginTop: 10,
+    marginBottom: 30,
   },
 });

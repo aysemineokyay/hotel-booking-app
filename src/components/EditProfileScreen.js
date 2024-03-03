@@ -188,18 +188,13 @@ const EditProfileScreen = () => {
           />
         </View>
       </View>
-
-      <TouchableOpacity
-        onPress={handleSaveChanges}
-        style={{
-          backgroundColor: "#448178",
-          paddingHorizontal: 30,
-          paddingVertical: 10,
-          borderRadius: 15,
-        }}
-      >
-        <Text style={{ color: "white" }}>Save Changes</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Save Changes"
+          color="white"
+          onPress={handleSaveChanges}
+        />
+      </View>
     </View>
   );
 };
@@ -221,6 +216,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     fontSize: 16,
+  },
+  buttonContainer: {
+    marginTop: "10%",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+    backgroundColor: "#448178",
+    width: "80%",
   },
 });
 

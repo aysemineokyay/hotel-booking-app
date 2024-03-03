@@ -18,7 +18,6 @@ import {
   selectHotels,
 } from "../../slices/homeScreenSlice";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { addRezervation } from "../../slices/bookingScreenSlice";
 import { auth, db } from "../../services/firebase";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -79,7 +78,7 @@ const BookingNewScreen = ({ route }) => {
                   value={startDate}
                   mode={"date"}
                   is24Hour={true}
-                  display={"spinner"}
+                  display={"default"}
                   onChange={onStartDateChange}
                 />
               </View>
@@ -90,7 +89,7 @@ const BookingNewScreen = ({ route }) => {
                   value={endDate}
                   mode={"date"}
                   is24Hour={true}
-                  display={"spinner"}
+                  display={"default"}
                   onChange={onEndDateChange}
                 />
               </View>
@@ -119,6 +118,8 @@ const BookingNewScreen = ({ route }) => {
           <View
             style={{
               flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
             }}
           >
             {dataa[0].roomTypes.map((rt) => (
@@ -134,10 +135,11 @@ const BookingNewScreen = ({ route }) => {
           <View
             style={{
               height: 200,
-              // borderColor: "#D9D9D9",
-              borderColor: "red",
+              borderColor: "#448178",
               borderRadius: 15,
               borderWidth: 1,
+              padding: 10,
+              marginVertical: 20,
             }}
           >
             <View style={{ padding: 5, flexDirection: "row" }}>
@@ -192,7 +194,7 @@ const BookingNewScreen = ({ route }) => {
               })
             }
           >
-            <Text style={styles.buttonText}>CONFIRM</Text>
+            <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -216,7 +218,8 @@ const styles = StyleSheet.create({
     borderColor: "#D9D9D9",
     borderWidth: 1,
     borderRadius: 15,
-    marginHorizontal: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
     marginBottom: 2,
   },
   label: {
@@ -229,53 +232,41 @@ const styles = StyleSheet.create({
   datepicker: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   datepicker_view: {
-    width: 160,
+    flexDirection: "column",
     borderColor: "#D9D9D9",
-    borderRadius: 15,
+    borderRadius: 10,
     borderWidth: 1,
   },
   button: {
-    borderColor: "#0D9276",
+    borderColor: "#448178",
     borderWidth: 2,
     color: "0D9276",
-    borderRadius: 30,
-    backgroundColor: "#0D9276",
-    width: 80,
-    height: 20,
+    borderRadius: 10,
+    backgroundColor: "#448178",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
     justifyContent: "center",
     alignSelf: "center",
     marginTop: 20,
+    width: "100%",
   },
   buttonText: {
     textAlign: "center",
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "white",
+    fontSize: 20,
   },
   roomTypeButton: {
-    borderColor: "#0D9276",
+    borderColor: "#448178",
     borderWidth: 2,
-    borderRadius: 30,
-    backgroundColor: "#0D9276",
-    width: 80,
+    borderRadius: 10,
+    backgroundColor: "#448178",
+    width: 90,
     height: 80,
     justifyContent: "center",
     alignSelf: "center",
-    marginLeft: "10%",
-  },
-  backButton: {
-    position: "absolute",
-    top: 50,
-    left: 10,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  backButtonText: {
-    marginLeft: 7,
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
   },
 });

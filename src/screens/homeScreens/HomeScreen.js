@@ -57,6 +57,8 @@ const HomeScreen = () => {
           renderItem={renderHotel}
           keyExtractor={(item) => item.id}
           numColumns={2}
+          style={{ gap: 5 }}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
@@ -67,12 +69,11 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 16,
-    marginTop: 50,
-    marginBottom: 250,
+    flex: 1,
+    paddingHorizontal: 20,
   },
   flatlistContainer: {
     alignItems: "center",
-    marginBottom: "auto",
+    flex: 1,
   },
 });

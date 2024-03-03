@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import HomeScreen from "../screens/homeScreens/HomeScreen";
 import BookingScreen from "../screens/homeScreens/BookingScreen";
-import FavoriteScreen from "../screens/homeScreens/FavoriteScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
@@ -58,20 +57,6 @@ const MyBottomTabNavigator = () => {
             return (
               <View>
                 <AntDesign name="book" size={30} color="black" />
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Favorite"
-        component={FavoriteScreen}
-        options={{
-          title: "Favorite",
-          tabBarIcon: () => {
-            return (
-              <View>
-                <MaterialIcons name="favorite-border" size={30} color="black" />
               </View>
             );
           },
