@@ -184,7 +184,7 @@ const HotelDetails = ({ route }) => {
           </Text>
         </View>
 
-        {/* <FooterInfo /> */}
+        <FooterInfo />
       </View>
     </ScrollView>
   );

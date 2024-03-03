@@ -8,7 +8,7 @@ const FooterInfo = () => {
         <Text style={styles.text}>$200.00</Text>
       </View>
       <View>
-        <TouchableOpacity style={styles.button} >
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Reservation</Text>
         </TouchableOpacity>
       </View>
@@ -20,17 +20,12 @@ export default FooterInfo;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 30,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 40,
-    backgroundColor: "#FFFFFF",
-    paddingBottom: 20,
-    marginBottom: "auto",
-  },
-  textContainer: {
-    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-between",
+    width: "100%",
   },
   text: {
     fontSize: 18,
