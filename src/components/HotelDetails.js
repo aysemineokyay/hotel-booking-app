@@ -29,6 +29,7 @@ import {
   selectHotels,
   selectStatus,
 } from "../slices/homeScreenSlice";
+import { LogBox } from "react-native";
 
 const HotelDetails = ({ route }) => {
   const hotels = useSelector(selectHotels);
@@ -37,36 +38,45 @@ const HotelDetails = ({ route }) => {
   const data = useSelector(selectData);
   const dispatch = useDispatch();
   const dataHotel = route.params;
+  LogBox.ignoreLogs([
+    "Non-serializable values were found in the navigation state",
+  ]);
   console.log("dataHotel", dataHotel);
   useEffect(() => {
     dispatch(getHotelsAndRoomTypes(dataHotel.data.ref));
   }, []);
-  console.log("dataaaaaaaa", data[0].roomTypes);
-  const [selectedTab, setSelectedTab] = useState("Details");
-  const renderContent = () => {
-    if (selectedTab === "Details") {
-      return (
-        <ScrollView>
-          <Details />
-        </ScrollView>
-      );
-    } else if (selectedTab === "Trip Plan") {
-      return (
-        <ScrollView>
-          <TripPlan />
-        </ScrollView>
-      );
-    } else if (selectedTab === "Review") {
-      return (
-        <ScrollView>
-          <Reviews />
-        </ScrollView>
-      );
-    }
-  };
-  const handleTabPress = (tabTitle) => {
-    setSelectedTab(tabTitle);
-  };
+  const [activeDotIndex, setActiveDotIndex] = useState(0);
+  const cards = [1, 2, 3, 4];
+  const CARD_WIDTH = 346;
+  console.log(
+    "dataaaaaaaa",
+    data[0].roomTypes.map((item) => item)
+  );
+  // const [selectedTab, setSelectedTab] = useState("Details");
+  // const renderContent = () => {
+  //   if (selectedTab === "Details") {
+  //     return (
+  //       <ScrollView>
+  //         <Details />
+  //       </ScrollView>
+  //     );
+  //   } else if (selectedTab === "Trip Plan") {
+  //     return (
+  //       <ScrollView>
+  //         <TripPlan />
+  //       </ScrollView>
+  //     );
+  //   } else if (selectedTab === "Review") {
+  //     return (
+  //       <ScrollView>
+  //         <Reviews />
+  //       </ScrollView>
+  //     );
+  //   }
+  // };
+  // const handleTabPress = (tabTitle) => {
+  //   setSelectedTab(tabTitle);
+  // };
 
   const navigation = useNavigation();
 
@@ -78,12 +88,13 @@ const HotelDetails = ({ route }) => {
 
   const onPress = () => {
     // @ts-ignore
-    navigation.navigate("Map");
+    navigation.navigate("Map", { data: dataHotel.data });
   };
 
   return (
-    <View style={styles.container}>
-      {/* <Carousel
+    <ScrollView contentContainerStyle={{ flex: 1 }}>
+      <View style={styles.container}>
+        {/* <Carousel
         data={dataHotel.data.detail_images}
         renderItem={renderCarouselItem}
         sliderWidth={410}
@@ -91,125 +102,149 @@ const HotelDetails = ({ route }) => {
         layout="default"
         loop={true}
       /> */}
-      <FlatList
-        data={dataHotel.data.detail_images}
-        horizontal={true}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderCarouselItem}
-        contentContainerStyle={{
-          justifyContent: "space-between",
-          height: 250,
-          marginVertical: 50,
-          alignContent: "center",
-          alignItems: "center",
-          // shadowColor: "#000",
-          // shadowOffset: {
-          //   width: 0,
-          //   height: 3,
-          // },
-          // shadowOpacity: 0.2,
-          // shadowRadius: 12.35,
+        <FlatList
+          // Kart listesi
+          data={dataHotel.data.detail_images}
+          // Render edilecek component (Card)
+          renderItem={renderCarouselItem}
+          // Listeleme için key
+          keyExtractor={(item) => item.toString()}
+          // Yatayda dizmek için
+          horizontal={true}
+          // Cardlar arası genişlik
+          ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+          // ListView'ın container stili
+          contentContainerStyle={{ padding: 16 }}
+          // Native scroll indicator'ı kaldırmak için
+          showsHorizontalScrollIndicator={false}
+          // Sayfalama yapması için
+          pagingEnabled={true}
+          // Card'ların yapışması için verdiğimiz array
+          // CardWidth + ItemSeparatorComponent
+          // 330 + 16 = 346
+          // Yani bu piksellerde duracak
+          // [346, 692, 1038, 1384, 1730, 2076, 2422, 2768, 3114]
+          snapToOffsets={cards.map((_, i) => i * CARD_WIDTH)}
+          // Hızlı kaydırma için
+          decelerationRate={"fast"}
+          // Scroll edildiğinde çalışır
+          onScroll={(e) => {
+            const newIndex = Math.round(
+              e.nativeEvent.contentOffset.x / CARD_WIDTH
+            );
+            setActiveDotIndex(newIndex);
+          }}
+        />
+        {/* Dots */}
+        <View style={styles.dotContainer}>
+          {cards.map((_, i) =>
+            i === activeDotIndex ? (
+              <View key={i} style={[styles.dot, styles.activeDot]} />
+            ) : (
+              <View key={i} style={styles.dot} />
+            )
+          )}
+        </View>
 
-          // elevation: 19,
-        }}
-        // ItemSeparatorComponent={() => (
-        //   <View
-        //     style={{
-        //       width: 4,
-        //     }}
-        //   />
-        // )}
-        showsVerticalScrollIndicator={false}
-        scrollEnabled={true}
-        pagingEnabled={true}
-        snapToOffsets={dataHotel.data.detail_images.map((_, i) => i * 346)}
-        showsHorizontalScrollIndicator={true}
-        decelerationRate={"fast"}
-      />
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Ionicons name="chevron-back" size={20} color="black" />
-        <Text style={styles.backButtonText}>Back</Text>
-      </TouchableOpacity>
-
-      <View style={{ flexDirection: "column", gap: 5 }}>
-        <View style={styles.infoContainer}>
-          <View style={styles.hotelNameContainer}>
-            <Text style={styles.hotelName}>{dataHotel.data.name}</Text>
+        <View style={{ flexDirection: "column", gap: 5 }}>
+          <View style={styles.infoContainer}>
+            <View style={styles.hotelNameContainer}>
+              <Text style={styles.hotelName}>{dataHotel.data.name}</Text>
+            </View>
+            <View style={styles.rateContainer}>
+              <AntDesign name="star" size={22} color="gold" />
+              <Text style={styles.rate}>{dataHotel.data.rating}</Text>
+            </View>
           </View>
-          <View style={styles.rateContainer}>
-            <AntDesign name="star" size={22} color="orange" />
-            <Text style={styles.rate}>{dataHotel.data.rating}</Text>
+          <View style={styles.placeNameContainer}>
+            <EvilIcons name="location" size={24} color="black" />
+            <Text style={styles.placeNameText}>{dataHotel.data.city}</Text>
           </View>
         </View>
-        <View style={styles.placeNameContainer}>
-          <EvilIcons name="location" size={24} color="black" />
-          <Text style={styles.placeNameText}>{dataHotel.data.city}</Text>
-        </View>
-      </View>
 
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <ImageBackground
-          source={require("../../assets/map.png")}
-          resizeMode="cover"
-          style={styles.mapContainer}
-        >
-          <Text style={styles.buttonText}>Show on map</Text>
-        </ImageBackground>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <ImageBackground
+            source={require("../../assets/map.png")}
+            resizeMode="cover"
+            style={styles.mapContainer}
+          >
+            <Text style={styles.buttonText}>Show on map</Text>
+          </ImageBackground>
+        </TouchableOpacity>
 
-      <HotelDetailsButton
+        {/* <HotelDetailsButton
         onTabPress={handleTabPress}
         selectedTab={selectedTab}
-      />
-      {renderContent()}
+      /> */}
+        {/* {renderContent()} */}
+        <View style={styles.description}>
+          <Text style={styles.textTitle}>Details</Text>
+          <Text style={styles.descriptionText}>
+            {dataHotel.data.description}
+          </Text>
+        </View>
 
-      <FooterInfo />
-    </View>
+        {/* <FooterInfo /> */}
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
+    paddingHorizontal: 20,
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    padding: 20,
+    justifyContent: "center",
   },
   carouselItem: {
-    width: 350,
-    height: 230,
+    width: 330,
+    height: 200,
+    justifyContent: "space-between",
   },
   image: {
-    width: 320,
-    height: 230,
+    width: 330,
+    height: 200,
     resizeMode: "cover",
     // borderBottomLeftRadius: 30,
     // borderBottomRightRadius: 30,
   },
-
-  backButton: {
-    position: "absolute",
-    top: 50,
-    left: 10,
+  dotContainer: {
     flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
+    marginTop: 4,
   },
-  backButtonText: {
-    marginLeft: 7,
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 20,
+  dot: {
+    backgroundColor: "#efefef",
+    width: 10,
+    height: 10,
+    borderRadius: 10,
+    marginHorizontal: 2,
   },
+  activeDot: {
+    backgroundColor: "#333",
+    width: 10,
+  },
+
+  // backButton: {
+  //   position: "absolute",
+  //   top: 50,
+  //   left: 10,
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  // },
+  // backButtonText: {
+  //   marginLeft: 7,
+  //   color: "white",
+  //   fontWeight: "bold",
+  //   fontSize: 20,
+  // },
   infoContainer: {
-    marginTop: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
+    marginTop: 10,
   },
   hotelNameContainer: {},
   hotelName: {
@@ -237,6 +272,12 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: "contain",
   },
+  description: { marginTop: 20 },
+  descriptionText: {
+    fontSize: 16,
+    textAlign: "justify",
+  },
+  textTitle: { fontSize: 20, fontWeight: "bold", marginBottom: 10 },
   button: {
     marginTop: 20,
     width: "100%",

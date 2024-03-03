@@ -6,7 +6,6 @@ import HotelDetails from "../components/HotelDetails";
 import EditProfileScreen from "../components/EditProfileScreen";
 import ChangePasswordScreen from "../components/ChangePasswordScreen";
 import Map from "../components/Map";
-import LoginAccountScreen from "../components/LoginAccountScreen";
 
 const HomeRoutes = () => {
   const Stack = createNativeStackNavigator();
@@ -26,12 +25,15 @@ const HomeRoutes = () => {
       <Stack.Screen
         name="HotelDetails"
         component={HotelDetails}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: true,
+          contentStyle: { backgroundColor: "white" },
+        }}
       />
       <Stack.Screen
         name="Map"
         component={Map}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
 
       <Stack.Screen
