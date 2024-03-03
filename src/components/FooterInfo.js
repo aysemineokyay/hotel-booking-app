@@ -1,15 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
-const FooterInfo = () => {
+const FooterInfo = ({ data }) => {
+  const navigation = useNavigation();
+  const handlePress = (data) => {
+    console.log("hotel data:", data.data);
+    // @ts-ignore
+    navigation.navigate("BookingNew", { hotelData: data.data });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>$200.00</Text>
       </View>
       <View>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Reservation</Text>
+        <TouchableOpacity style={styles.button} onPress={() => handlePress(data)}>
+          <Text style={styles.buttonText}>Book Now</Text>
+
         </TouchableOpacity>
       </View>
     </View>

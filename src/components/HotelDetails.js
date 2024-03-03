@@ -22,6 +22,7 @@ import TripPlan from "./TripPlan";
 import Reviews from "./Reviews";
 import FooterInfo from "./FooterInfo";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   getHotelsAndRoomTypes,
   selectData,
@@ -30,6 +31,7 @@ import {
   selectStatus,
 } from "../slices/homeScreenSlice";
 import { LogBox } from "react-native";
+
 
 const HotelDetails = ({ route }) => {
   const hotels = useSelector(selectHotels);
@@ -45,6 +47,7 @@ const HotelDetails = ({ route }) => {
   useEffect(() => {
     dispatch(getHotelsAndRoomTypes(dataHotel.data.ref));
   }, []);
+
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const cards = [1, 2, 3, 4];
   const CARD_WIDTH = 346;
@@ -78,6 +81,9 @@ const HotelDetails = ({ route }) => {
   //   setSelectedTab(tabTitle);
   // };
 
+  // console.log("dataaaaaaaa", data[0].roomTypes);
+ 
+
   const navigation = useNavigation();
 
   const renderCarouselItem = ({ item }) => (
@@ -102,6 +108,7 @@ const HotelDetails = ({ route }) => {
         layout="default"
         loop={true}
       /> */}
+
         <FlatList
           // Kart listesi
           data={dataHotel.data.detail_images}
@@ -162,31 +169,21 @@ const HotelDetails = ({ route }) => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <ImageBackground
-            source={require("../../assets/map.png")}
-            resizeMode="cover"
-            style={styles.mapContainer}
-          >
-            <Text style={styles.buttonText}>Show on map</Text>
-          </ImageBackground>
-        </TouchableOpacity>
-
-        {/* <HotelDetailsButton
-        onTabPress={handleTabPress}
-        selectedTab={selectedTab}
-      /> */}
-        {/* {renderContent()} */}
-        <View style={styles.description}>
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+        <ImageBackground source={require("../../assets/map.png")} resizeMode="cover" style={styles.mapContainer}>
+          <Text style={styles.buttonText}>Show on map</Text>
+        </ImageBackground>
+      </TouchableOpacity>
+   <View style={styles.description}>
           <Text style={styles.textTitle}>Details</Text>
           <Text style={styles.descriptionText}>
             {dataHotel.data.description}
           </Text>
         </View>
 
-        <FooterInfo />
-      </View>
-    </ScrollView>
+      <FooterInfo data={dataHotel} />
+    </View>
+ </ScrollView>
   );
 };
 

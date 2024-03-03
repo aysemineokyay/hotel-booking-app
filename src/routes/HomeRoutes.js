@@ -7,6 +7,9 @@ import EditProfileScreen from "../components/EditProfileScreen";
 import ChangePasswordScreen from "../components/ChangePasswordScreen";
 import Map from "../components/Map";
 
+import BookingNewScreen from "../screens/homeScreens/BookingNewScreen";
+
+
 const HomeRoutes = () => {
   const Stack = createNativeStackNavigator();
   return (
@@ -17,24 +20,11 @@ const HomeRoutes = () => {
         headerTitle: "",
       }}
     >
-      <Stack.Screen
-        name="MyBottomTabNavigator"
-        component={MyBottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="HotelDetails"
-        component={HotelDetails}
-        options={{
-          headerShown: true,
-          contentStyle: { backgroundColor: "white" },
-        }}
-      />
-      <Stack.Screen
-        name="Map"
-        component={Map}
-        options={{ headerShown: true }}
-      />
+
+      <Stack.Screen name="MyBottomTabNavigator" component={MyBottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="HotelDetails" component={HotelDetails} options={{ headerShown: false }} />
+      <Stack.Screen name="BookingNew" component={BookingNewScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Map" component={Map} options={{ headerShown: false }} />
 
       <Stack.Screen
         name="EditProfileScreen"

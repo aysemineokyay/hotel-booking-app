@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator, ScrollView, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,6 +17,7 @@ import BookingCard from "../../components/BookingCard";
 const BookingScreen = () => {
   // const rezervations = useSelector(selectRezervations);
   // const hotelsData = useSelector(selectHotelsData);
+
   const data = useSelector(selectData);
   const newData = useSelector(selectNewData);
   const hotels = useSelector(selectHotels);
@@ -52,9 +46,9 @@ const BookingScreen = () => {
       </View>
     );
   }
-  console.log("fggfgfgffffff", newData);
-  console.log("tttt", newData[0].rezervation);
-  console.log("qqqq", data[0].hotelsData);
+  // console.log("fggfgfgffffff", newData);
+  // console.log("tttt", newData[0].rezervation);
+  // console.log("qqqq", data[0].hotelsData);
   return (
     <View style={styles.container}>
       <FlatList
