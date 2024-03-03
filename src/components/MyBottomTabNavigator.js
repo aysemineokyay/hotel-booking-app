@@ -7,11 +7,13 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ProfileNavigator from "./ProfileNavigator";
 import ProfileScreen from "../screens/homeScreens/ProfileScreen";
+import { useDispatch } from "react-redux";
+import { getRezervations } from "../slices/bookingScreenSlice";
 
 const MyBottomTabNavigator = () => {
   const Tab = createBottomTabNavigator();
+  const dispatch = useDispatch();
   return (
     <Tab.Navigator
       sceneContainerStyle={{
@@ -34,7 +36,7 @@ const MyBottomTabNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown:false,
+          headerShown: false,
           title: "Home",
           tabBarIcon: () => {
             return (
@@ -51,6 +53,8 @@ const MyBottomTabNavigator = () => {
         options={{
           title: "Booking",
           tabBarIcon: () => {
+            dispatch(getRezervations());
+
             return (
               <View>
                 <AntDesign name="book" size={30} color="black" />

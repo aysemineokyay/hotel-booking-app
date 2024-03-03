@@ -47,15 +47,9 @@ export const getHotels = createAsyncThunk("homeScreen/getHotels", async () => {
 export const getHotelsAndRoomTypes = createAsyncThunk(
   "homeScreen/getHotelsAndRoomTypes",
   async (ref) => {
-    // console.log("refffff", ref);
     const roomTypesRef = collection(db, "roomTypes");
-    const q = query(
-      roomTypesRef,
-      where("hotelId", "==", ref),
-      orderBy("price_per_night", "asc")
-    );
+    const q = query(roomTypesRef, where("hotelId", "==", ref));
     const snapshot = await getDocs(q);
-    // console.log("snaphot", snapshot);
     const roomTypes = snapshot.docs.map((docs) => {
       const id = docs.id;
       const roomTypesData = docs.data();
@@ -69,7 +63,6 @@ export const getHotelsAndRoomTypes = createAsyncThunk(
         price_per_night: roomTypesData.price_per_night,
       };
     });
-    console.log("oooooooooooo", roomTypes);
     const hotelsDataPromises = roomTypes.map(async (item) => {
       try {
         const hotelDoc = await getDoc(item.hotelId);
@@ -87,85 +80,21 @@ export const getHotelsAndRoomTypes = createAsyncThunk(
           detail_images: dataHotel.detail_images,
         };
       } catch (error) {
-        console.error("ekkkkk", error);
+        console.error("error", error);
         throw error; // Hata oluşursa dışarıya at
       }
     });
 
     // Tüm asenkron işlemlerin tamamlanmasını bekleyin ve sonuçları alın
     const hotelsData = await Promise.all(hotelsDataPromises);
-    // console.log("roomTypes", roomTypes);
-    // const hotelsDataPromises = roomTypes.map(async (item) => {
-    //   try {
-    //     const hotelDoc = await getDoc(item.ref);
-    //     const dataHotel = hotelDoc.data();
-    //     return {
-    //       country: dataHotel.country,
-    //       city: dataHotel.city,
-    //       location: dataHotel.location,
-    //       image: dataHotel.image,
-    //       description: dataHotel.description,
-    //       rating: dataHotel.rating,
-    //       name: dataHotel.name,
-    //       detail_images: dataHotel.detail_images,
-    //     };
-    //   } catch (error) {
-    //     console.error("e", error);
-    //     throw error; // Hata oluşursa dışarıya at
-    //   }
-    // });
 
-    // Tüm asenkron işlemlerin tamamlanmasını bekleyin ve sonuçları alın
-    // const hotelsData = await Promise.all(hotelsDataPromises);
-
-    // const roomTypeDataPromises = rezervations.map(async (item) => {
-    //   try {
-    //     const roomTypeDoc = await getDoc(item.roomTypeId);
-    //     const dataRoomType = roomTypeDoc.data();
-    //     return {
-    //       capacity: dataRoomType.capacity,
-    //       description: dataRoomType.description,
-    //       hotelId: dataRoomType.hotelId,
-    //       name: dataRoomType.name,
-    //       numberOfRoom: dataRoomType.numberOfRoom,
-    //       price_per_night: dataRoomType.price_per_night,
-    //     };
-    //   } catch (error) {
-    //     console.error("e", error);
-    //     throw error; // Hata oluşursa dışarıya at
-    //   }
-    // });
-
-    // // Tüm asenkron işlemlerin tamamlanmasını bekleyin ve sonuçları alın
-    // const roomTypeData = await Promise.all(roomTypeDataPromises);
     const data = [
       {
-        // rezervations: rezervations,
         hotel: hotelsData[0],
         roomTypes: roomTypes,
       },
     ];
-    console.log("datawwww", data);
     return data;
-    // const newData = [];
-    // data.forEach((item) => {
-    //   const length = Math.max(
-    //     item.rezervations.length,
-    //     item.hotelsData.length,
-    //     item.roomTypeData.length
-    //   );
-    //   for (let i = 0; i < length; i++) {
-    //     const rezervation = item.rezervations[i] || {};
-    //     const hotelData = item.hotelsData[i] || {};
-    //     const roomType = item.roomTypeData[i] || {};
-    //     newData.push({
-    //       rezervation,
-    //       hotelData,
-    //       roomType,
-    //     });
-    //   }
-    // });
-    // return newData;
   }
 );
 

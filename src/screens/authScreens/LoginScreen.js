@@ -13,7 +13,6 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import {
-  createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -27,8 +26,6 @@ import {
 } from "../../slices/loginScreenSlice";
 
 const LoginScreen = () => {
-  // const [email, setEmail] = useState("ayse@gmail.com");
-  // const [password, setPassword] = useState("123456");
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
   const dispatch = useDispatch();
@@ -120,9 +117,9 @@ const LoginScreen = () => {
           <View style={styles.passwordInputRightSide}>
             <TouchableOpacity onPress={togglePasswordVisibility}>
               {showPassword ? (
-                <FontAwesome5 name="eye-slash" size={24} color="grey" />
-              ) : (
                 <FontAwesome5 name="eye" size={24} color="grey" />
+              ) : (
+                <FontAwesome5 name="eye-slash" size={24} color="grey" />
               )}
             </TouchableOpacity>
           </View>

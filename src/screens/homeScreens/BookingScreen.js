@@ -6,39 +6,17 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getHotelDataOfRezervations,
-  getRezervations,
-  selectHotelsData,
-  selectRezervations,
-  selectData,
-  selectNewData,
-} from "../../slices/bookingScreenSlice";
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectNewData } from "../../slices/bookingScreenSlice";
 import { selectStatus } from "../../slices/bookingScreenSlice";
-import { selectError } from "../../slices/bookingScreenSlice";
-import { getHotels, selectHotels } from "../../slices/homeScreenSlice";
+
 import BookingCard from "../../components/BookingCard";
 
 const BookingScreen = () => {
-  // const rezervations = useSelector(selectRezervations);
-  // const hotelsData = useSelector(selectHotelsData);
-
-  const data = useSelector(selectData);
   const newData = useSelector(selectNewData);
-  const hotels = useSelector(selectHotels);
   const status = useSelector(selectStatus);
-  const error = useSelector(selectError);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getRezervations());
-    // rezervations.forEach((item) => {
-    //   console.log("item", item.hotelId);
-    //   dispatch(getHotelDataOfRezervations(item.hotelId));
-    // });
-  }, [newData.length]);
-  console.log("hey", newData);
+
   if (status === "loading") {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -54,9 +32,7 @@ const BookingScreen = () => {
       </View>
     );
   }
-  // console.log("fggfgfgffffff", newData);
-  // console.log("tttt", newData[0].rezervation);
-  // console.log("qqqq", data[0].hotelsData);
+
   return (
     <View style={styles.container}>
       <FlatList

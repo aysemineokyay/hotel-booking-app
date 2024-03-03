@@ -10,16 +10,13 @@ import {
   ImageBackground,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import Carousel from "react-native-snap-carousel-new";
+
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import Map from "./Map";
-import HotelDetailsButton from "./CustomButton";
 import { useEffect, useState } from "react";
-import Details from "./Details";
-import TripPlan from "./TripPlan";
-import Reviews from "./Reviews";
+
 import FooterInfo from "./FooterInfo";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -42,46 +39,14 @@ const HotelDetails = ({ route }) => {
   LogBox.ignoreLogs([
     "Non-serializable values were found in the navigation state",
   ]);
-  console.log("dataHotel", dataHotel);
+
   useEffect(() => {
     dispatch(getHotelsAndRoomTypes(dataHotel.data.ref));
   }, []);
 
-  console.log("data1212", data[0]);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const cards = [1, 2, 3, 4];
   const CARD_WIDTH = 346;
-  console.log(
-    "dataaaaaaaa",
-    data[0].roomTypes.map((item) => item)
-  );
-  // const [selectedTab, setSelectedTab] = useState("Details");
-  // const renderContent = () => {
-  //   if (selectedTab === "Details") {
-  //     return (
-  //       <ScrollView>
-  //         <Details />
-  //       </ScrollView>
-  //     );
-  //   } else if (selectedTab === "Trip Plan") {
-  //     return (
-  //       <ScrollView>
-  //         <TripPlan />
-  //       </ScrollView>
-  //     );
-  //   } else if (selectedTab === "Review") {
-  //     return (
-  //       <ScrollView>
-  //         <Reviews />
-  //       </ScrollView>
-  //     );
-  //   }
-  // };
-  // const handleTabPress = (tabTitle) => {
-  //   setSelectedTab(tabTitle);
-  // };
-
-  // console.log("dataaaaaaaa", data[0].roomTypes);
 
   const navigation = useNavigation();
 
@@ -99,15 +64,6 @@ const HotelDetails = ({ route }) => {
   return (
     <ScrollView contentContainerStyle={{ flex: 1 }}>
       <View style={styles.container}>
-        {/* <Carousel
-        data={dataHotel.data.detail_images}
-        renderItem={renderCarouselItem}
-        sliderWidth={410}
-        itemWidth={410}
-        layout="default"
-        loop={true}
-      /> */}
-
         <FlatList
           // Kart listesi
           data={dataHotel.data.detail_images}
@@ -184,7 +140,7 @@ const HotelDetails = ({ route }) => {
           </Text>
         </View>
 
-        <FooterInfo data={data[0]} />
+        <FooterInfo data={dataHotel} />
       </View>
     </ScrollView>
   );
@@ -205,8 +161,6 @@ const styles = StyleSheet.create({
     width: 330,
     height: 200,
     resizeMode: "cover",
-    // borderBottomLeftRadius: 30,
-    // borderBottomRightRadius: 30,
   },
   dotContainer: {
     flexDirection: "row",
@@ -225,20 +179,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#333",
     width: 10,
   },
-
-  // backButton: {
-  //   position: "absolute",
-  //   top: 50,
-  //   left: 10,
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  // },
-  // backButtonText: {
-  //   marginLeft: 7,
-  //   color: "white",
-  //   fontWeight: "bold",
-  //   fontSize: 20,
-  // },
   infoContainer: {
     flexDirection: "row",
     alignItems: "center",

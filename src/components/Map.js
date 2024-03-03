@@ -6,7 +6,7 @@ import useLocation from "../hooks/useLocation";
 
 const Map = ({ navigation, route }) => {
   const data = route.params.data;
-  console.log("map", data);
+
   useEffect(() => {
     navigation.setOptions({ headerTitle: `${data.name}` });
     map.current.animateToRegion({

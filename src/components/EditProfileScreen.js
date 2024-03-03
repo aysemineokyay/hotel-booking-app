@@ -25,7 +25,6 @@ import {
   updateEmail,
   updateProfile,
 } from "firebase/auth";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const EditProfileScreen = () => {
   const email = useSelector(selectEmail);
@@ -45,25 +44,12 @@ const EditProfileScreen = () => {
     });
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri); // file:///
-      // uploadToFirebase(result.assets[0].uri);
+      setImage(result.assets[0].uri);
     }
   };
-  // const uploadToFirebase = async (uri) => {
-  //   const localImageRes = await fetch(uri);
-  //   const blob = await localImageRes.blob();
-  //   const imageId = uuid();
-  //   const refString = `flowers/${imageId}.jpg`;
-  //   const imageRef = ref(storage, refString);
-  //   const result = await uploadBytes(imageRef, blob);
-  //   getDownloadURL(result.ref).then((url) => {
-  //     setUrls((prev) => [...prev, url]);
-  //   });
-  // };
 
   const handleSaveChanges = () => {
     const credential = EmailAuthProvider.credential(user.email, password);
-    console.log("credential", credential);
 
     // Kullanıcının yeniden doğrulanması
     reauthenticateWithCredential(user, credential)
@@ -73,14 +59,11 @@ const EditProfileScreen = () => {
             .then(() => {
               sendEmailVerification(user)
                 .then(() => {
-                  console.log("Doğrulama e-postası gönderildi.");
-
                   updateProfile(user, {
                     displayName: userName,
                     photoURL: image,
                   })
                     .then(() => {
-                      console.log("Profil bilgileri güncellendi.");
                       Alert.alert(
                         "Başarılı",
                         "Profil bilgileri başarıyla güncellendi."
@@ -90,7 +73,6 @@ const EditProfileScreen = () => {
                       setUserName(null);
                     })
                     .catch((error) => {
-                      console.error("Profil güncelleme hatası:", error);
                       Alert.alert(
                         "Hata",
                         "Profil bilgileriniz güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz."
@@ -98,7 +80,6 @@ const EditProfileScreen = () => {
                     });
                 })
                 .catch((error) => {
-                  console.error("Doğrulama e-postası gönderme hatası:", error);
                   Alert.alert(
                     "Hata",
                     "Bir hata oluştu. Lütfen tekrar deneyiniz."
@@ -106,7 +87,6 @@ const EditProfileScreen = () => {
                 });
             })
             .catch((error) => {
-              console.error("E-posta güncelleme hatası:", error);
               Alert.alert(
                 "Hata",
                 "Profil bilgileriniz güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz."
@@ -118,7 +98,6 @@ const EditProfileScreen = () => {
             photoURL: image,
           })
             .then(() => {
-              console.log("Profil bilgileri güncellendi.");
               Alert.alert(
                 "Başarılı",
                 "Profil bilgileri başarıyla güncellendi."
@@ -128,7 +107,6 @@ const EditProfileScreen = () => {
               setUserName(null);
             })
             .catch((error) => {
-              console.error("Profil güncelleme hatası:", error);
               Alert.alert(
                 "Hata",
                 "Profil bilgileriniz güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz."
@@ -137,7 +115,6 @@ const EditProfileScreen = () => {
         }
       })
       .catch((error) => {
-        console.error("Yeniden doğrulama hatası:", error);
         Alert.alert(
           "Hata",
           "Lütfen kullanıcı bilgilerinizi kontrol ediniz ve tekrar giriş yapınız."

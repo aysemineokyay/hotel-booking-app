@@ -10,9 +10,6 @@ const ProfileNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        // headerShadowVisible: false,
-        // headerTintColor: "black",
-        // headerBackTitleVisible: false,
         contentStyle: { backgroundColor: "white" },
         headerShown: true,
       }}

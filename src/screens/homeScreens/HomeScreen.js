@@ -35,7 +35,7 @@ const HomeScreen = () => {
       </View>
     );
   }
-  // console.log("hotels", hotels[0].name);
+
   const renderHotel = ({ item }) => <HotelCard data={item} />;
 
   const handleSearch = (text) => {

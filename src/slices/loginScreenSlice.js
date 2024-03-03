@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  password: "123456",
+  password: null,
   confirmPassword: null,
-  email: "ayse@gmail.com",
+  email: null,
 };
 
 const loginScreenSlice = createSlice({

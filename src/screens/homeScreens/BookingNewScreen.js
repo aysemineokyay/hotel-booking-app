@@ -9,12 +9,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getHotelDataOfRezervations,
-  getRezervations,
-  selectHotelsData,
-  selectRezervations,
-} from "../../slices/bookingScreenSlice";
+import { getHotelDataOfRezervations } from "../../slices/bookingScreenSlice";
 import { selectStatus } from "../../slices/bookingScreenSlice";
 import { selectError } from "../../slices/bookingScreenSlice";
 import {
@@ -26,40 +21,31 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { addRezervation } from "../../slices/bookingScreenSlice";
 import { auth, db } from "../../services/firebase";
-import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { doc } from "firebase/firestore";
 
 const BookingNewScreen = ({ route }) => {
-  const rezervations = useSelector(selectRezervations);
-  const hotelsData = useSelector(selectHotelsData);
   const dataa = useSelector(selectData);
   const hotels = useSelector(selectHotels);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [adultCount, setAdultCount] = useState(0);
   const [childCount, setChildCount] = useState(0);
   const [roomCount, setRoomCount] = useState(0);
   const [roomType, setRoomType] = useState("Single");
-  console.log("data:", dataa[0]);
 
-  console.log("hotel data:", route.params.hotelData);
   const hotelData = route.params.hotelData;
   useEffect(() => {
-    // dispatch(getRezervations());
-    // rezervations.forEach((item) => {
-    //   console.log("item", item.hotelId);
     dispatch(getHotelDataOfRezervations(hotelData.id));
   }, [hotelData]);
   const onStartDateChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setStartDate(currentDate);
   };
-  console.log("selected", roomType.id);
+
   const onEndDateChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setEndDate(currentDate);
@@ -181,14 +167,7 @@ const BookingNewScreen = ({ route }) => {
               </Text>
             </View>
           </View>
-          {dataa[0].roomTypes.map((rt) => (
-            <Pressable
-              style={styles.roomTypeButton}
-              onPress={() => setRoomType(rt)}
-            >
-              <Text style={styles.buttonText}>{rt.name}</Text>
-            </Pressable>
-          ))}
+
           <Text
             style={{ textAlign: "center", fontWeight: "bold", marginTop: 10 }}
           >

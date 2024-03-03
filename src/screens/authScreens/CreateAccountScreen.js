@@ -7,7 +7,6 @@ import {
   Text,
   Keyboard,
   KeyboardAvoidingView,
-  TouchableOpacity,
   Platform,
   TouchableWithoutFeedback,
   Alert,
@@ -42,20 +41,18 @@ const CreateAccountScreen = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           updateProfile(auth.currentUser, {
-            displayName: username, // Burada istediğiniz display name'i belirtin
+            displayName: username,
           })
             .then(() => {
               sendEmailVerification(userCredential.user);
             })
             .then(() => {
-              // E-posta doğrulama gönderildi
               Alert.alert(
                 "Başarılı",
                 `Doğrulama maili gönderildi: ${userCredential.user.email}`
               );
             })
             .catch((error) => {
-              // Hata oluştu
               console.log(error);
               Alert.alert("Error", error.message);
             });

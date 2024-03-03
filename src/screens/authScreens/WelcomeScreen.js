@@ -12,7 +12,6 @@ import { storage } from "../../services/firebase.js";
 import { Dimensions } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectImageUrl, setImageUrl } from "../../slices/welcomeScreenSlice";
-import { Button } from "react-native-web";
 
 const WelcomeScreen = ({ navigation }) => {
   const imageUrl = useSelector(selectImageUrl);

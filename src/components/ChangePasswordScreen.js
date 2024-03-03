@@ -48,7 +48,6 @@ const ChangePasswordScreen = (navigation) => {
     } else if (newPassword === confirmPassword) {
       const user = auth.currentUser;
       const credential = EmailAuthProvider.credential(user.email, password);
-      console.log("credential", credential);
       reauthenticateWithCredential(user, credential)
         .then(() => {
           // Yeni şifreyi kullanarak kullanıcının şifresini güncelle

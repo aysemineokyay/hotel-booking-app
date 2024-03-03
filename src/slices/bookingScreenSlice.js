@@ -63,8 +63,8 @@ export const getRezervations = createAsyncThunk(
           detail_images: dataHotel.detail_images,
         };
       } catch (error) {
-        console.error("ewww", error);
-        throw error; // Hata oluşursa dışarıya at
+        console.error("error", error);
+        throw error;
       }
     });
 
@@ -75,12 +75,7 @@ export const getRezervations = createAsyncThunk(
       try {
         const roomTypeDoc = await getDoc(item.roomTypeId);
         const dataRoomType = roomTypeDoc.data();
-        console.log("deneme", Object(roomTypeDoc) === roomTypeDoc);
-        console.log("deneme2", Object(dataRoomType) === dataRoomType);
-        console.log("dataRoomType", dataRoomType);
-        // const id = roomTypeDoc.id;
-        // console.log("id", id);
-        console.log("roomTypeDoc", roomTypeDoc);
+
         return {
           id: 5,
           capacity: dataRoomType.capacity,
@@ -91,7 +86,7 @@ export const getRezervations = createAsyncThunk(
           price_per_night: dataRoomType.price_per_night,
         };
       } catch (error) {
-        console.error("egggg", error);
+        console.error("error", error);
         throw error; // Hata oluşursa dışarıya at
       }
     });
@@ -154,7 +149,6 @@ export const getHotelDataOfRezervations = createAsyncThunk(
 export const addRezervation = async (data) => {
   const rezervationsRef = collection(db, "rezervations");
   var response = await addDoc(rezervationsRef, data);
-  console.log("response:", response);
   return;
 };
 const bookingScreenSlice = createSlice({

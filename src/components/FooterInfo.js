@@ -4,9 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 const FooterInfo = ({ data }) => {
   const navigation = useNavigation();
   const handlePress = (data) => {
-    console.log("footer:", data.roomTypes);
     // @ts-ignore
-    navigation.navigate("BookingNew", { hotelData: data });
+    navigation.navigate("BookingNew", { hotelData: data.data });
   };
   return (
     <View style={styles.container}>
