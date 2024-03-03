@@ -20,6 +20,7 @@ const HotelCard = ({ data }) => {
     <TouchableOpacity style={styles.cardContainer} onPress={handlePress}>
       <View>
         <Image style={styles.image} source={{ uri: data.image }} />
+        <TouchableOpacity></TouchableOpacity>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.hotelName} numberOfLines={2} ellipsizeMode="tail">

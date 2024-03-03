@@ -4,19 +4,21 @@ import { useNavigation } from "@react-navigation/native";
 const FooterInfo = ({ data }) => {
   const navigation = useNavigation();
   const handlePress = (data) => {
-    console.log("hotel data:", data.data);
+    console.log("footer:", data.roomTypes);
     // @ts-ignore
-    navigation.navigate("BookingNew", { hotelData: data.data });
+    navigation.navigate("BookingNew", { hotelData: data });
   };
   return (
     <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>$200.00</Text>
+      <View>
+        <Text style={styles.text}>$</Text>
       </View>
       <View>
-        <TouchableOpacity style={styles.button} onPress={() => handlePress(data)}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handlePress(data)}
+        >
           <Text style={styles.buttonText}>Book Now</Text>
-
         </TouchableOpacity>
       </View>
     </View>

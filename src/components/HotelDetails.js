@@ -32,7 +32,6 @@ import {
 } from "../slices/homeScreenSlice";
 import { LogBox } from "react-native";
 
-
 const HotelDetails = ({ route }) => {
   const hotels = useSelector(selectHotels);
   const status = useSelector(selectStatus);
@@ -48,6 +47,7 @@ const HotelDetails = ({ route }) => {
     dispatch(getHotelsAndRoomTypes(dataHotel.data.ref));
   }, []);
 
+  console.log("data1212", data[0]);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const cards = [1, 2, 3, 4];
   const CARD_WIDTH = 346;
@@ -82,7 +82,6 @@ const HotelDetails = ({ route }) => {
   // };
 
   // console.log("dataaaaaaaa", data[0].roomTypes);
- 
 
   const navigation = useNavigation();
 
@@ -169,21 +168,25 @@ const HotelDetails = ({ route }) => {
           </View>
         </View>
 
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <ImageBackground source={require("../../assets/map.png")} resizeMode="cover" style={styles.mapContainer}>
-          <Text style={styles.buttonText}>Show on map</Text>
-        </ImageBackground>
-      </TouchableOpacity>
-   <View style={styles.description}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <ImageBackground
+            source={require("../../assets/map.png")}
+            resizeMode="cover"
+            style={styles.mapContainer}
+          >
+            <Text style={styles.buttonText}>Show on map</Text>
+          </ImageBackground>
+        </TouchableOpacity>
+        <View style={styles.description}>
           <Text style={styles.textTitle}>Details</Text>
           <Text style={styles.descriptionText}>
             {dataHotel.data.description}
           </Text>
         </View>
 
-      <FooterInfo data={dataHotel} />
-    </View>
- </ScrollView>
+        <FooterInfo data={data[0]} />
+      </View>
+    </ScrollView>
   );
 };
 

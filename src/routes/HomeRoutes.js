@@ -35,7 +35,7 @@ const HomeRoutes = () => {
       <Stack.Screen
         name="BookingNew"
         component={BookingNewScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
       <Stack.Screen
         name="Map"

@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, ActivityIndicator, ScrollView, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -30,7 +37,8 @@ const BookingScreen = () => {
     //   console.log("item", item.hotelId);
     //   dispatch(getHotelDataOfRezervations(item.hotelId));
     // });
-  }, []);
+  }, [newData.length]);
+  console.log("hey", newData);
   if (status === "loading") {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

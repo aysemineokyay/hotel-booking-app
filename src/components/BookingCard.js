@@ -3,6 +3,7 @@ import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 const BookingCard = ({ dataBooking }) => {
+  console.log("dataBooking", dataBooking);
   return (
     <View style={styles.card}>
       <View style={styles.part_up}>

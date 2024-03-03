@@ -5,7 +5,7 @@ import {
   getDocs,
   query,
   where,
-  addDoc
+  addDoc,
 } from "firebase/firestore";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
@@ -50,7 +50,9 @@ export const getRezervations = createAsyncThunk(
       try {
         const hotelDoc = await getDoc(item.hotelId);
         const dataHotel = hotelDoc.data();
+        const id = hotelDoc.id;
         return {
+          id: id,
           country: dataHotel.country,
           city: dataHotel.city,
           location: dataHotel.location,
@@ -73,7 +75,14 @@ export const getRezervations = createAsyncThunk(
       try {
         const roomTypeDoc = await getDoc(item.roomTypeId);
         const dataRoomType = roomTypeDoc.data();
+        console.log("deneme", Object(roomTypeDoc) === roomTypeDoc);
+        console.log("deneme2", Object(dataRoomType) === dataRoomType);
+        console.log("dataRoomType", dataRoomType);
+        // const id = roomTypeDoc.id;
+        // console.log("id", id);
+        console.log("roomTypeDoc", roomTypeDoc);
         return {
+          id: 5,
           capacity: dataRoomType.capacity,
           description: dataRoomType.description,
           hotelId: dataRoomType.hotelId,
@@ -136,6 +145,7 @@ export const getHotelDataOfRezervations = createAsyncThunk(
         description: hotelsData.description,
         rating: hotelsData.rating,
         name: hotelsData.name,
+        detail_images: hotelsData.detail_images,
       };
     });
     return hotels;
@@ -196,6 +206,6 @@ export const selectData = (state) => state.bookingScreen.data;
 export const selectNewData = (state) => state.bookingScreen.newData;
 export const selectStatus = (state) => state.bookingScreen.status;
 export const selectError = (state) => state.bookingScreen.error;
-export const { setRezervations, setHotelsData, setData } =
+export const { setRezervations, setHotelsData, setData, setNewData } =
   bookingScreenSlice.actions;
 export default bookingScreenSlice;
