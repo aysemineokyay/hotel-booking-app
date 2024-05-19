@@ -1,6 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, TextInput, View } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 
 const HomeScreen_SearchBar = (props) => {

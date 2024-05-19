@@ -37,7 +37,7 @@ const HomeScreen = () => {
       </View>
     );
   }
-  const renderHotel = ({ item, index }) => (
+  const renderHotel = ({ item, index}) => (
     <HotelCard
       data={item}
       index={index}
@@ -46,6 +46,7 @@ const HomeScreen = () => {
           ? users[0].favorites.map((fv) => fv.data)
           : []
       }
+
     />
   );
   const handleSearch = (text) => {
@@ -67,7 +68,7 @@ const HomeScreen = () => {
           renderItem={renderHotel}
           keyExtractor={(item) => item.id}
           numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
+          columnWrapperStyle={{ justifyContent: "space-between",gap:40 }}
           showsVerticalScrollIndicator={false}
         />
       </View>

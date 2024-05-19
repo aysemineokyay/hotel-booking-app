@@ -27,6 +27,7 @@ const HotelCard = ({ data, index, user }) => {
     );
     setIsFavorite(isFavorited);
   }, []);
+  console.log(data);
   // const x = user.map((item) => {
   //   if (item.description === data.description) return true;
   //   else return false;
@@ -71,12 +72,7 @@ const HotelCard = ({ data, index, user }) => {
         </Text>
         <View style={styles.cityRating}>
           <View style={styles.placeContainer}>
-            <EvilIcons
-              name="location"
-              size={18}
-              color="#767676"
-              style={styles.icon}
-            />
+            <EvilIcons name="location" size={18} color="#767676" />
             <Text style={styles.place}>{data.city}</Text>
           </View>
           <View>
@@ -99,11 +95,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingVertical: 15,
     paddingHorizontal: 10,
-    width: "47%",
     borderRadius: 20,
     marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
+
   },
   image: {
     width: 120,
@@ -113,28 +109,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "100%",
+    flex: 1,
   },
   textContainer: {
     justifyContent: "space-between",
     marginTop: 10,
     marginLeft: 10,
     flex: 1,
+    width: 120,
   },
 
   placeContainer: {
-    justifyContent: "flex-start",
     flexDirection: "row",
-    gap: 5,
   },
   heartIcon: { position: "absolute", top: 5, right: 5 },
   hotelName: {
     fontSize: 15,
     fontWeight: "600",
     marginBottom: 2,
+    flexWrap:"wrap"
   },
-
-  icon: {},
 
   place: {
     fontSize: 12,
