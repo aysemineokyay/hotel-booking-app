@@ -67,12 +67,21 @@ const BookingNewScreen = ({ navigation, route }) => {
     return [year, month, day].join("-");
   };
   const getTotalDays = (startDate, endDate) => {
-    var diffTime = Math.abs(endDate - startDate);
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (startDate <= endDate) {
+      return 0;
+    } else {
+      var diffTime = Math.abs(endDate - startDate);
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    }
   };
   const selectRoomType = (rt) => {
     setRoomType(rt);
   };
+  const totalPrice =
+    getTotalDays(endDate, startDate) *
+    roomType.price_per_night *
+    (adultCount + childCount) *
+    roomCount;
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.mainView}>
@@ -373,18 +382,7 @@ const BookingNewScreen = ({ navigation, route }) => {
             <Text style={{ fontWeight: "bold" }}>Check Out Date: </Text>
             <Text>{endDate.toLocaleDateString()}</Text>
           </View>
-          {/* <View style={{ padding: 5, flexDirection: "row" }}>
-            <Text style={{ fontWeight: "bold" }}>Adult Count: </Text>
-            <Text>{adultCount}</Text>
-          </View>
-          <View style={{ padding: 5, flexDirection: "row" }}>
-            <Text style={{ fontWeight: "bold" }}>Child Count: </Text>
-            <Text>{childCount}</Text>
-          </View>
-          <View style={{ padding: 5, flexDirection: "row" }}>
-            <Text style={{ fontWeight: "bold" }}>Room Count: </Text>
-            <Text>{roomCount}</Text>
-          </View> */}
+
           <View style={{ padding: 5, flexDirection: "row" }}>
             <Text style={{ fontWeight: "bold" }}>Room Type: </Text>
             <Text>
@@ -393,18 +391,7 @@ const BookingNewScreen = ({ navigation, route }) => {
           </View>
           <View style={{ padding: 5, flexDirection: "row" }}>
             <Text style={{ fontWeight: "bold" }}>
-              {getTotalDays(endDate, startDate) *
-                roomType.price_per_night *
-                (adultCount + childCount) *
-                roomCount >
-              0
-                ? `Total Price :  ₺${
-                    getTotalDays(endDate, startDate) *
-                    roomType.price_per_night *
-                    (adultCount + childCount) *
-                    roomCount
-                  }`
-                : ""}
+              {totalPrice > 0 ? `Total Price :  ₺${totalPrice}` : ""}
             </Text>
           </View>
         </View>
@@ -412,14 +399,9 @@ const BookingNewScreen = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            if (
-              getTotalDays(endDate, startDate) *
-                roomType.price_per_night *
-                (adultCount + childCount) *
-                roomCount ===
-              0
-            ) {
+            if (isNaN(totalPrice) || totalPrice === 0) {
               Alert.alert("Warning", "Please select all details");
+              return;
             }
             addRezervation({
               adultCount: Number(adultCount),
@@ -430,11 +412,7 @@ const BookingNewScreen = ({ navigation, route }) => {
               hotelId: doc(db, "hotels/" + hotelData.id),
               roomCount: Number(roomCount),
               roomTypeId: doc(db, "roomTypes/" + roomType.id),
-              totalPrice:
-                getTotalDays(endDate, startDate) *
-                roomType.price_per_night *
-                (adultCount + childCount) *
-                roomCount,
+              totalPrice: totalPrice,
               userId: auth.currentUser.uid,
             });
             dispatch(
@@ -447,14 +425,11 @@ const BookingNewScreen = ({ navigation, route }) => {
                 hotelId: doc(db, "hotels/" + hotelData.id),
                 roomCount: Number(roomCount),
                 roomTypeId: doc(db, "roomTypes/" + roomType.id),
-                totalPrice:
-                  getTotalDays(endDate, startDate) *
-                  roomType.price_per_night *
-                  (adultCount + childCount) *
-                  roomCount,
+                totalPrice: totalPrice,
                 userId: auth.currentUser.uid,
               })
             );
+
             navigation.navigate("ConfirmScreen");
           }}
         >

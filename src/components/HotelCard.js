@@ -27,7 +27,6 @@ const HotelCard = ({ data, index, user }) => {
     );
     setIsFavorite(isFavorited);
   }, []);
-  console.log(data);
   // const x = user.map((item) => {
   //   if (item.description === data.description) return true;
   //   else return false;
@@ -99,7 +98,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
-
   },
   image: {
     width: 120,
@@ -127,7 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600",
     marginBottom: 2,
-    flexWrap:"wrap"
+    flexWrap: "wrap",
   },
 
   place: {
