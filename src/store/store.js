@@ -4,6 +4,7 @@ import bookingScreenSlice from "../slices/bookingScreenSlice.js";
 import routerSlice from "../slices/routerSlice.js";
 import welcomeScreenSlice from "../slices/welcomeScreenSlice.js";
 import loginScreenSlice from "../slices/loginScreenSlice.js";
+import favoriteScreenSlice from "../slices/favoriteScreenSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     router: routerSlice.reducer,
     welcomeScreen: welcomeScreenSlice.reducer,
     loginScreen: loginScreenSlice.reducer,
+    favoriteScreen: favoriteScreenSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -75,9 +75,10 @@ export const getRezervations = createAsyncThunk(
       try {
         const roomTypeDoc = await getDoc(item.roomTypeId);
         const dataRoomType = roomTypeDoc.data();
+        const id = roomTypeDoc.id;
 
         return {
-          id: 5,
+          id: id,
           capacity: dataRoomType.capacity,
           description: dataRoomType.description,
           hotelId: dataRoomType.hotelId,
@@ -93,6 +94,7 @@ export const getRezervations = createAsyncThunk(
 
     // Tüm asenkron işlemlerin tamamlanmasını bekleyin ve sonuçları alın
     const roomTypeData = await Promise.all(roomTypeDataPromises);
+
     const data = [
       {
         rezervations: rezervations,
@@ -146,6 +148,36 @@ export const getHotelDataOfRezervations = createAsyncThunk(
     return hotels;
   }
 );
+
+export const getRezervationsData = createAsyncThunk(
+  "bookingScreen/getRezervationsData",
+  async () => {
+    const rezervationsRef = collection(db, "rezervations");
+    const q = query(
+      rezervationsRef,
+      where("userId", "==", auth.currentUser.uid)
+    );
+    const snapshot = await getDocs(q);
+    const rezervations = snapshot.docs.map((docs) => {
+      const id = docs.id;
+      const rezervationsData = docs.data();
+      return {
+        id: id,
+        hotelId: rezervationsData.hotelId,
+        roomTypeId: rezervationsData.roomTypeId,
+        guestCount: rezervationsData.guestCount,
+        childCount: rezervationsData.childCount,
+        adultCount: rezervationsData.adultCount,
+        checkInDate: rezervationsData.checkInDate,
+        checkOutDate: rezervationsData.checkOutDate,
+        roomCount: rezervationsData.roomCount,
+        totalPrice: rezervationsData.totalPrice,
+        userId: rezervationsData.userId,
+      };
+    });
+    return rezervations;
+  }
+);
 export const addRezervation = async (data) => {
   const rezervationsRef = collection(db, "rezervations");
   var response = await addDoc(rezervationsRef, data);
@@ -157,6 +189,9 @@ const bookingScreenSlice = createSlice({
   reducers: {
     setRezervations: (state, action) => {
       state.rezervations = action.payload;
+    },
+    addRezervations: (state, action) => {
+      state.rezervations.push(action.payload);
     },
     setHotelsData: (state, action) => {
       state.hotelsData = action.payload;
@@ -180,6 +215,17 @@ const bookingScreenSlice = createSlice({
       state.status = "idle";
       state.newData = action.payload;
     });
+    builder.addCase(getRezervationsData.pending, (state, action) => {
+      state.status = "loading";
+    });
+    builder.addCase(getRezervationsData.rejected, (state, action) => {
+      state.status = "failed";
+      state.status = action.error.message;
+    });
+    builder.addCase(getRezervationsData.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.rezervations = action.payload;
+    });
     builder.addCase(getHotelDataOfRezervations.pending, (state, action) => {
       state.status = "loading";
     });
@@ -200,6 +246,11 @@ export const selectData = (state) => state.bookingScreen.data;
 export const selectNewData = (state) => state.bookingScreen.newData;
 export const selectStatus = (state) => state.bookingScreen.status;
 export const selectError = (state) => state.bookingScreen.error;
-export const { setRezervations, setHotelsData, setData, setNewData } =
-  bookingScreenSlice.actions;
+export const {
+  setRezervations,
+  setHotelsData,
+  setData,
+  setNewData,
+  addRezervations,
+} = bookingScreenSlice.actions;
 export default bookingScreenSlice;

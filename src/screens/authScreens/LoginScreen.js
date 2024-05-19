@@ -131,8 +131,8 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.signInContainer}>
-        <TouchableOpacity onPress={handleLogin}>
+      <View>
+        <TouchableOpacity style={styles.signInContainer} onPress={handleLogin}>
           <Text style={styles.signInContainerText}>Sign In</Text>
         </TouchableOpacity>
       </View>

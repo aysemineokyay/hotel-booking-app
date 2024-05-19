@@ -54,7 +54,7 @@ const EditProfileScreen = () => {
     // Kullanıcının yeniden doğrulanması
     reauthenticateWithCredential(user, credential)
       .then(() => {
-        if (user.email !== newEmail) {
+        if (user.email !== newEmail && newEmail !== null) {
           updateEmail(user, newEmail)
             .then(() => {
               sendEmailVerification(user)
@@ -92,7 +92,7 @@ const EditProfileScreen = () => {
                 "Profil bilgileriniz güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz."
               );
             });
-        } else {
+        } else if (userName !== null || image !== null) {
           updateProfile(user, {
             displayName: userName,
             photoURL: image,
@@ -112,6 +112,11 @@ const EditProfileScreen = () => {
                 "Profil bilgileriniz güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz."
               );
             });
+        } else {
+          Alert.alert(
+            "Uyarı",
+            "Lütfen güncellemek istediğiniz bilgileri giriniz."
+          );
         }
       })
       .catch((error) => {

@@ -155,7 +155,9 @@ const styles = StyleSheet.create({
   carouselItem: {
     width: 330,
     height: 200,
-    justifyContent: "space-between",
+    justifyContent: "center",
+    flexDirection: "row",
+    backgroundColor: "#00000033",
   },
   image: {
     width: 330,

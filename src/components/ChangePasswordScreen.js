@@ -35,7 +35,7 @@ const ChangePasswordScreen = (navigation) => {
   const password = useSelector(selectPassword);
   const confirmPassword = useSelector(selectConfirmPassword);
   const dispatch = useDispatch();
-  const [newPassword, setNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState(null);
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const height = useHeaderHeight();
@@ -43,6 +43,8 @@ const ChangePasswordScreen = (navigation) => {
   const handleChangePassword = () => {
     if (newPassword === password) {
       Alert.alert("Uyarı", "Yeni şifreniz eski şifreniz ile aynı olamaz");
+    } else if (newPassword === null) {
+      Alert.alert("Hata", "Şifre boş geçilemez!");
     } else if (newPassword !== confirmPassword) {
       Alert.alert("Hata", "Şifreler birbiriyle aynı değil!");
     } else if (newPassword === confirmPassword) {

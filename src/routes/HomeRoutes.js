@@ -8,6 +8,7 @@ import ChangePasswordScreen from "../components/ChangePasswordScreen";
 import Map from "../components/Map";
 
 import BookingNewScreen from "../screens/homeScreens/BookingNewScreen";
+import ConfirmScreen from "../screens/homeScreens/ConfirmScreen";
 
 const HomeRoutes = () => {
   const Stack = createNativeStackNavigator();
@@ -38,6 +39,14 @@ const HomeRoutes = () => {
         options={{
           headerShown: true,
           contentStyle: { backgroundColor: "white" },
+        }}
+      />
+      <Stack.Screen
+        name="ConfirmScreen"
+        component={ConfirmScreen}
+        options={{
+          headerShown: false,
+          contentStyle: { backgroundColor: "#448178" },
         }}
       />
       <Stack.Screen

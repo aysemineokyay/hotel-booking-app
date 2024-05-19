@@ -13,19 +13,21 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getHotels,
   selectHotels,
-  selectError,
   selectStatus,
+  selectUsers,
 } from "../../slices/homeScreenSlice";
 import { Text } from "react-native";
+import { getUsers } from "../../slices/favoriteScreenSlice";
 
 const HomeScreen = () => {
-  const [list, setList] = useState();
   const hotels = useSelector(selectHotels);
+  const users = useSelector(selectUsers);
   const status = useSelector(selectStatus);
-  const error = useSelector(selectError);
   const dispatch = useDispatch();
+  const [list, setList] = useState();
   useEffect(() => {
     dispatch(getHotels());
+    dispatch(getUsers());
   }, []);
   if (status === "loading") {
     return (
@@ -35,11 +37,19 @@ const HomeScreen = () => {
       </View>
     );
   }
-
-  const renderHotel = ({ item }) => <HotelCard data={item} />;
-
+  const renderHotel = ({ item, index }) => (
+    <HotelCard
+      data={item}
+      index={index}
+      user={
+        users[0].favorites.length > 0
+          ? users[0].favorites.map((fv) => fv.data)
+          : []
+      }
+    />
+  );
   const handleSearch = (text) => {
-    const filteredList = hotels[0].filter((place) => {
+    const filteredList = hotels.filter((place) => {
       const searchedText = text.toLowerCase();
       const currentTitle = place.city.toLowerCase();
       return currentTitle.indexOf(searchedText) > -1;
@@ -53,11 +63,11 @@ const HomeScreen = () => {
       <HomeScreen_SearchBar onSearch={handleSearch} />
       <View style={styles.flatlistContainer}>
         <FlatList
-          data={hotels}
+          data={list ? list : hotels}
           renderItem={renderHotel}
           keyExtractor={(item) => item.id}
           numColumns={2}
-          style={{ gap: 5 }}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
           showsVerticalScrollIndicator={false}
         />
       </View>
@@ -75,5 +85,6 @@ const styles = StyleSheet.create({
   flatlistContainer: {
     alignItems: "center",
     flex: 1,
+    justifyContent: "space-between",
   },
 });

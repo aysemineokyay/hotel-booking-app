@@ -6,16 +6,27 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectNewData } from "../../slices/bookingScreenSlice";
-import { selectStatus } from "../../slices/bookingScreenSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getRezervations,
+  getRezervationsData,
+  selectNewData,
+  selectRezervations,
+  selectStatus,
+} from "../../slices/bookingScreenSlice";
 
 import BookingCard from "../../components/BookingCard";
 
 const BookingScreen = () => {
   const newData = useSelector(selectNewData);
+  const rezervations = useSelector(selectRezervations);
   const status = useSelector(selectStatus);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getRezervations());
+  }, [rezervations.length]);
 
   if (status === "loading") {
     return (
@@ -25,13 +36,13 @@ const BookingScreen = () => {
       </View>
     );
   }
-  if (status === "idle" && newData.length === 0) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Rezervasyon bulunmamaktadır.</Text>
-      </View>
-    );
-  }
+  // if (status === "idle" && newData.length === 0) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+  //       <Text style={styles.text}>Rezervasyon bulunmamaktadır.</Text>
+  //     </View>
+  //   );
+  // }
 
   return (
     <View style={styles.container}>
@@ -40,6 +51,18 @@ const BookingScreen = () => {
         renderItem={({ item }) => <BookingCard dataBooking={item} />}
         keyExtractor={(item, index) => index.toString()}
         numColumns={1}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text style={styles.text}>Rezervasyon bulunmamaktadır.</Text>
+          </View>
+        )}
       />
     </View>
   );
@@ -51,8 +74,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
     alignItems: "center",
     justifyContent: "center",
   },
+  text: { fontSize: 20 },
 });

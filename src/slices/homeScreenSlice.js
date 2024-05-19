@@ -1,15 +1,18 @@
 import {
+  arrayRemove,
+  arrayUnion,
   collection,
   doc,
   getDoc,
   getDocs,
   orderBy,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { db } from "../services/firebase";
+import { auth, db } from "../services/firebase";
 
 const initialState = {
   hotels: [],
@@ -18,6 +21,8 @@ const initialState = {
   data: [{ roomTypes: [], hotel: {} }],
   status: "idle",
   error: null,
+  favorites: [],
+  users: [{ favorites: [] }],
 };
 
 export const getHotels = createAsyncThunk("homeScreen/getHotels", async () => {
@@ -97,6 +102,53 @@ export const getHotelsAndRoomTypes = createAsyncThunk(
     return data;
   }
 );
+export const getUsers = createAsyncThunk("homeScreen/getUsers", async () => {
+  const usersRef = collection(db, "users");
+  const email = auth.currentUser.email;
+  const q = query(usersRef, where("email", "==", email));
+  const snapshot = await getDocs(q);
+  const users = snapshot.docs.map((docs) => {
+    const id = docs.id;
+    const usersData = docs.data();
+    return {
+      id: id,
+      email: usersData.email,
+      favorites: usersData.favorites,
+      userName: usersData.userName,
+    };
+  });
+  return users;
+});
+
+export const getFavorites = createAsyncThunk(
+  "homeScreen/getFavorites",
+  async () => {
+    const usersRef = collection(db, "users");
+    const email = auth.currentUser.email;
+    const q = query(usersRef, where("email", "==", email));
+    const snapshot = await getDocs(q);
+    const favorites = snapshot.docs.map((docs) => {
+      const id = docs.id;
+      const usersData = docs.data();
+      return usersData.favorites;
+    });
+    return favorites[0];
+  }
+);
+
+export const addFavorites = async (data) => {
+  const uid = auth.currentUser.uid;
+  await updateDoc(doc(db, "users", `${uid}`), {
+    favorites: arrayUnion(data),
+  });
+};
+
+export const deleteFavorites = async (data) => {
+  const uid = auth.currentUser.uid;
+  await updateDoc(doc(db, "users", `${uid}`), {
+    favorites: arrayRemove(data),
+  });
+};
 
 const homeScreenSlice = createSlice({
   name: "homeScreen",
@@ -107,6 +159,28 @@ const homeScreenSlice = createSlice({
     },
     setData: (state, action) => {
       state.data = action.payload;
+    },
+    setUsers: (state, action) => {
+      state.users = action.payload;
+    },
+    setFavorites: (state, action) => {
+      state.favorites = action.payload;
+    },
+    addFavorite: (state, action) => {
+      const uid = auth.currentUser.uid;
+      updateDoc(doc(db, "users", `${uid}`), {
+        favorites: arrayUnion(action.payload),
+      });
+      state.users[0].favorites.push(action.payload);
+    },
+    deleteFavorite: (state, action) => {
+      const uid = auth.currentUser.uid;
+      updateDoc(doc(db, "users", `${uid}`), {
+        favorites: arrayRemove(action.payload),
+      });
+      state.users[0].favorites.filter((item) => {
+        item !== action.payload;
+      });
     },
   },
   extraReducers(builder) {
@@ -132,12 +206,43 @@ const homeScreenSlice = createSlice({
       state.status = "idle";
       state.data = action.payload;
     });
+    builder.addCase(getUsers.pending, (state, action) => {
+      state.status = "loading";
+    });
+    builder.addCase(getUsers.rejected, (state, action) => {
+      state.status = "failed";
+      state.status = action.error.message;
+    });
+    builder.addCase(getUsers.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.users = action.payload;
+    });
+    builder.addCase(getFavorites.pending, (state, action) => {
+      state.status = "loading";
+    });
+    builder.addCase(getFavorites.rejected, (state, action) => {
+      state.status = "failed";
+      state.status = action.error.message;
+    });
+    builder.addCase(getFavorites.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.favorites = action.payload;
+    });
   },
 });
 
 export const selectHotels = (state) => state.homeScreen.hotels;
 export const selectData = (state) => state.homeScreen.data;
+export const selectFavorites = (state) => state.homeScreen.favorites;
+export const selectUsers = (state) => state.homeScreen.users;
 export const selectStatus = (state) => state.homeScreen.status;
 export const selectError = (state) => state.homeScreen.error;
-export const { setHotels, setData } = homeScreenSlice.actions;
+export const {
+  setHotels,
+  setData,
+  setUsers,
+  setFavorites,
+  addFavorite,
+  deleteFavorite,
+} = homeScreenSlice.actions;
 export default homeScreenSlice;

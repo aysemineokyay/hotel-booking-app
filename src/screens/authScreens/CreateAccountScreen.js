@@ -27,7 +27,8 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../../services/firebase";
+import { auth, db } from "../../services/firebase";
+import { addDoc, doc, setDoc } from "firebase/firestore";
 
 const CreateAccountScreen = () => {
   const email = useSelector(selectEmail);
@@ -40,9 +41,18 @@ const CreateAccountScreen = () => {
     if (password === confirmPassword) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          updateProfile(auth.currentUser, {
-            displayName: username,
+          const userEmail = userCredential.user.email;
+          const uid = userCredential.user.uid;
+          setDoc(doc(db, "users", `${uid}`), {
+            email: userEmail,
+            userName: username,
+            favorites: [],
           })
+            .then(() => {
+              updateProfile(auth.currentUser, {
+                displayName: username,
+              });
+            })
             .then(() => {
               sendEmailVerification(userCredential.user);
             })

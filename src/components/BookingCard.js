@@ -22,7 +22,7 @@ const BookingCard = ({ dataBooking }) => {
           <View style={styles.rating}>
             <View style={{ flexDirection: "row" }}>
               <Text style={{ color: "#448178", fontWeight: "bold" }}>
-                ₺{dataBooking.roomType.price_per_night}{" "}
+                ₺{dataBooking.roomType.price_per_night}
               </Text>
               <Text style={styles.text}>/ Night</Text>
             </View>
