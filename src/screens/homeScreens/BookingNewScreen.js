@@ -96,6 +96,7 @@ const BookingNewScreen = ({ navigation, route }) => {
                 is24Hour={true}
                 display={"default"}
                 onChange={onStartDateChange}
+                minimumDate={new Date()}
               />
             </View>
             <View style={styles.datepicker_view}>
@@ -107,6 +108,7 @@ const BookingNewScreen = ({ navigation, route }) => {
                 is24Hour={true}
                 display={"default"}
                 onChange={onEndDateChange}
+                minimumDate={new Date()}
               />
             </View>
           </View>
